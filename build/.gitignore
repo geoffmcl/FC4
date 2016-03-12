@@ -3,4 +3,10 @@ CMakeFiles/*
 bldlog-1.txt
 cmake_install.cmake
 Makefile
-
+*.vcxproj
+*.filters
+Debug/*
+Release/*
+Win32/*
+*.dir/*
+*.sln
