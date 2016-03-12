@@ -1,0 +1,11 @@
+
+BOOL Tree_GetChildItems(HWND hwndTreeView, HTREEITEM hParentItem)
+{
+TVITEM         tvItem;
+LPITEMINFO     pItem;
+LPSHELLFOLDER  pParentFolder = NULL;
+HRESULT        hr;
+HCURSOR        hCursor;
+TV_SORTCB      tvSort;
+
+
