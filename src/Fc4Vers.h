@@ -14,7 +14,7 @@
 //	VERS    "January 27, 2007"  // FIX20070122 - remove some macros, and some
 // minor fixes in the HELP output.
 // VERS    "November 11, 2006"  // FIX20061111 - In Dell01, using MSVC8
-#pragma warning( disable:4996 )
+// #pragma warning( disable:4996 ) // FIX20160312 - Now done in CMakeLists.ts
 //	VERS    "September 10, 2006"  // minor fix for 1 on 1 compare - FIX20060910
 //	VERS    "September 6, 2006"  // attempt a fix of too much output
 // and openned fc4Help.c

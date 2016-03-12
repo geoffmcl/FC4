@@ -3,17 +3,40 @@
 #ifndef	_Fc4_h
 #define	_Fc4_h
 
-#include    "FC4Vers.h" // HISTORY and version
+#include    "Fc4Vers.h" // HISTORY and version
+#ifdef WIN32
 #define		WIN32_LEAN_AND_MEAN
 #include    <windows.h>
+#else   // !WIN32
+#include    <inttypes.h>
+#endif // WIN32 y/n
 #include    <stdlib.h>
-#include		<stdio.h>
+#include	<stdio.h>
 #include    "Fc4List.h"
 
+#ifdef WIN32
 #define	   MCRLF	"\r\n"
+#else // !WIN32
+#define	   MCRLF	"\n"
+typedef char TCHAR;
+typedef void * HANDLE;
+typedef void * LPVOID;
+typedef int BOOL;
+typedef char * LPTSTR;
+typedef char * PTSTR;
+typedef unsigned int DWORD;
+typedef int INT;
+#ifndef MAX_PATH
+#define MAX_PATH 264
+#endif
+#endif // WIN32 y/n
+
 #define	   MEOR  MCRLF
 
 #ifdef USE_INT64_TYPE  // FIX20080819 - add some 64-bit support
+#ifndef WIN32
+typedef int64_t __int64;   // FIX20160312 - add unix 64-bit support
+#endif
 typedef __int64 off64_t;   // FIX20080819 - add some 64-bit support
 #endif // USE_INT64_TYPE
 

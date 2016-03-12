@@ -76,6 +76,7 @@ set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${MSVC_LD_FLAGS}" )
 # have 6 C/C++ sources, 5 headers
 set(name fc4)
 set(dir src)
+include_directories( $dir )
 set(${name}_SRCS
     ${dir}/Fc4.c
     ${dir}/Fc4Comp.c
