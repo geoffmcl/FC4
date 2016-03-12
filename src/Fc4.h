@@ -29,6 +29,10 @@ typedef int INT;
 #ifndef MAX_PATH
 #define MAX_PATH 264
 #endif
+typedef struct _LIST_ENTRY {
+   struct _LIST_ENTRY *Flink;
+   struct _LIST_ENTRY *Blink;
+} LIST_ENTRY, *PLIST_ENTRY;
 #endif // WIN32 y/n
 
 #define	   MEOR  MCRLF
@@ -79,7 +83,7 @@ typedef struct {
 	BOOL	   mp_bGFI;
 	TCHAR	   mp_Nm[MAX_PATH];
 }MPSTR;
-typedef MPSTR FAR * LPMPSTR;
+typedef MPSTR * LPMPSTR;
 
 //#define NULLPMPSTR(a)           memset(a,0,sizeof(MPSTR))
 #define NULLPMPSTR(a)	ZeroMemory( a, sizeof(MPSTR) )
