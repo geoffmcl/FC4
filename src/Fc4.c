@@ -2,7 +2,9 @@
 // Fc4.c
 
 #include	"Fc4.h"
+#ifdef WIN32
 #include <lmerr.h>   // for NETWORK errors
+#endif // WIN32
 
 #define		MXIO			256
 #define		DEF_MATCH		1		// Default is -M2

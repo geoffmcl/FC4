@@ -9,6 +9,7 @@
 #include    <windows.h>
 #else   // !WIN32
 #include    <inttypes.h>
+#include    <string.h>  // for strlen, ...
 #endif // WIN32 y/n
 #include    <stdlib.h>
 #include	<stdio.h>
@@ -26,9 +27,13 @@ typedef char * LPTSTR;
 typedef char * PTSTR;
 typedef unsigned int DWORD;
 typedef int INT;
+typedef void VOID;
 #ifndef MAX_PATH
 #define MAX_PATH 264
 #endif
+#define TRUE 1
+#define FALSE 0
+#define INVALID_HANDLE_VALUE (HANDLE)-1
 typedef struct _LIST_ENTRY {
    struct _LIST_ENTRY *Flink;
    struct _LIST_ENTRY *Blink;
