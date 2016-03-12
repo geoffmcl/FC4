@@ -10,3 +10,6 @@ Release/*
 Win32/*
 *.dir/*
 *.sln
+*.user
+*.sdf
+*.opensdf
