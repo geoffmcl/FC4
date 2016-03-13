@@ -33,6 +33,7 @@ BOOL	wf( HANDLE hf, LPTSTR lpb, DWORD len )
 		( lpb ) &&
 		( len ) )
 	{
+#ifdef WIN32
 		if( ( !WriteFile( hf,	// handle to file to write to
 				lpb,	// pointer to data to write to file
 				len,		// number of bytes to write
@@ -42,6 +43,11 @@ BOOL	wf( HANDLE hf, LPTSTR lpb, DWORD len )
 		{
 			flg = FALSE;
 		}
+#else
+        wtn = fwrite(lpb,1,len,hf);
+        if (wtn != len)
+            flg = FALSE;
+#endif
 	}
 	return flg;
 }
@@ -58,7 +64,11 @@ void	PgmExit( BOOL bExit )
 	if( VH(ghOutFil) )
 	{
 		wf( ghOutFil, "\r\n", sizeof("\r\n") );
+#ifdef WIN32
 		CloseHandle(ghOutFil);
+#else
+        fclose(ghOutFil);
+#endif
 	}
 	//printf( MCRLF );
 	// 20080909 - no extra CRLF !!! po( MCRLF );
@@ -68,7 +78,7 @@ void	PgmExit( BOOL bExit )
    KillLList( &gsList2 );
 
 	if( glpWs )
-		LocalFree(glpWs);
+		MFREE(glpWs);
 	glpWs = 0;
 
    if(bExit)

@@ -8,6 +8,7 @@ extern void Process_Files( WS );
 
 HANDLE	OpenOutFile( LPTSTR lpf )
 {
+#ifdef WIN32
 	HANDLE	hFile = CreateFile( lpf,	// pointer to name of the file
 		GENERIC_READ|GENERIC_WRITE,			// access (read-write) mode
 		0,						// share mode
@@ -16,6 +17,9 @@ HANDLE	OpenOutFile( LPTSTR lpf )
 		FILE_ATTRIBUTE_NORMAL,	// file attributes
 		NULL );					// handle to file with attributes to 
                                // copy
+#else
+    HANDLE	hFile = fopen(lpf,"w");
+#endif
 	return hFile;
 }
 
