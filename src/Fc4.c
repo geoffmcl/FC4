@@ -205,7 +205,11 @@ int	CompFilesB2( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
 	LPTSTR	lpd = gszDiag;
    DWORD    err = 0;
    off64_t  offdone = 0;
+#ifdef WIN32
    LARGE_INTEGER  li;
+#else
+   __int64 sz;
+#endif
    LPMPSTR lpmps;
    PTSTR    ptmp;
 
@@ -258,12 +262,21 @@ int	CompFilesB2( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
                         //        "1234567890123456
 						      prt( MCRLF"  Offset:         F1 F2 (all in hex)" );
 					      }
+#ifdef  WIN32
                      li.QuadPart = (offdone + dwi);
-					      sprintf( lpd,
+                     sprintf( lpd,
 						      MCRLF"%08x%08x: %02X %02X",
 						      li.HighPart, li.LowPart,
 						      (b1[dwi] & 0xff),
 						      (b2[dwi] & 0xff) );
+#else
+                    sz = (offdone + dwi);
+                     sprintf( lpd,
+						      MCRLF"%16llu: %02X %02X",
+						      sz,
+						      (b1[dwi] & 0xff),
+						      (b2[dwi] & 0xff) );
+#endif
 					      prt( lpd );
 				      }
                }
