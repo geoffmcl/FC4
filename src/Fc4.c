@@ -865,10 +865,20 @@ void Process_1_File( WS )
 //		}
 	}
 
-	if( VH(ghFile1) )
+	if( VH(ghFile1) ) {
+#ifdef WIN32
 		CloseHandle(ghFile1);
-	if( VH(ghFile2) )
+#else
+        fclose(ghFile1);
+#endif
+    }
+	if( VH(ghFile2) ) {
+#ifdef WIN32
 		CloseHandle(ghFile2);
+#else
+        fclose(ghFile2);
+#endif
+    }
    ghFile1 = 0;
    ghFile2 = 0;
 }
