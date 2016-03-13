@@ -441,32 +441,39 @@ DWORD	RetFileSize( HANDLE hFile )
 	return dwRet;
 }
 #endif // USE_INT64_TYPE y/n
-
+#define MY_MAX_INPUT    0xffff
 BOOL	GetInputFile( WS, LPTSTR lpf )
 {
 	BOOL	bRet = TRUE;	// begin with error
 	HANDLE	hFile;
-	DWORD	dwSize1, dwSize2;
+	__int64	dwSize;
 	DWORD	dwAlloc;
 	LPSTR	lpb;
-
+    int     i = is_file_or_directory(lpf);
+    if (i != 1)
+        return TRUE;    // FAILED
+    dwSize = get_last_file_size();
+    if (dwSize > MY_MAX_INPUT)
+        return TRUE;    // TOO BIG FOR INPUT FILE!
 	hFile = OpenForRead( lpf );
 	if( VH( hFile ) )
 	{
-		dwSize1 = GetFileSize( hFile, &dwSize2 );
-		if( ( dwSize2 == 0 ) &&
-			( dwSize1 ) &&
-			( dwSize1 != (DWORD)-1 ) )
 		{
-			dwAlloc = ( ( dwSize1 + 1 ) + ( MXARGS * sizeof(LPVOID) ) );
-			if( lpb = LocalAlloc( LPTR, dwAlloc ) )
+			dwAlloc = (DWORD)( ( dwSize + 1 ) + ( MXARGS * sizeof(LPVOID) ) );
+			lpb = MALLOC( dwAlloc );
+            if (lpb)
 			{
+                DWORD dwSize2, dwSize1 = (DWORD)dwSize;
+#ifdef WIN32
 				if( ( ReadFile( hFile,	// handle of file to read
 					lpb,	// pointer to buffer that receives data
 					dwSize1,	// number of bytes to read
 					&dwSize2,	// pointer to number of bytes read
 					NULL ) ) &&
 					( dwSize1 == dwSize2 ) )
+#else
+                if ( (dwSize2 = fread(lpb,1,dwSize1,hFile)) == dwSize1 )
+#endif
 				{
 
 					LPSTR *	lpargv;
@@ -544,8 +551,12 @@ Skip:
 					}
 					else
 					{
-						LocalFree(lpb);
+						MFREE(lpb);
+#ifdef WIN32
 						CloseHandle(hFile);
+#else
+                        fclose(hFile);
+#endif
 						lpb = 0;
 						hFile = 0;
 						prt( "ERROR: Input file error!"MCRLF );
@@ -554,12 +565,17 @@ Skip:
 					}
 				}
 				if( lpb )
-					LocalFree(lpb);
+					MFREE(lpb);
 			}
 		}
 
-		if( hFile && (hFile != INVALID_HANDLE_VALUE) )
+		if( hFile && (hFile != INVALID_HANDLE_VALUE) ) {
+#ifdef WIN32
 			CloseHandle( hFile );
+#else
+            fclose(hFile);
+#endif
+        }
 	}
 
 	return bRet;
