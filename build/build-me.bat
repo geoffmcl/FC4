@@ -3,7 +3,7 @@
 @set DOINSTALL=0
 
 @set TMPRT=..
-@set TMPPRJ=fa4
+@set TMPPRJ=fc4
 @set TMPSRC=%TMPRT%
 @set TMPBGN=%TIME%
 @set TMPINS=%TMPRT%\software
