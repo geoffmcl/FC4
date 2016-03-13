@@ -241,7 +241,7 @@ int	CompFilesB2( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
 						      prt( MCRLF"  Offset:         F1 F2 (all in hex)" );
 					      }
                      li.QuadPart = (offdone + dwi);
-					      wsprintf( lpd,
+					      sprintf( lpd,
 						      MCRLF"%08x%08x: %02X %02X",
 						      li.HighPart, li.LowPart,
 						      (b1[dwi] & 0xff),
@@ -296,11 +296,11 @@ int	CompFilesB2( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
                if( dwk )
                {
                   // had some differences
-                  wsprintf(lpd, MCRLF"In addition to the above %I64u differences listed,"MCRLF,
+                  sprintf(lpd, MCRLF"In addition to the above %I64u differences listed,"MCRLF,
                      dwk );
                   prt(lpd);
                   ptmp = get_nice_number( offk, 0 );
-		   		   wsprintf( lpd, " some %s byte%s (%s) remain"MCRLF
+		   		   sprintf( lpd, " some %s byte%s (%s) remain"MCRLF
                      " in File %d: %s"MCRLF,
                      ptmp,
                      ((offk > 1) ? "s" : ""),
@@ -312,11 +312,11 @@ int	CompFilesB2( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
                {
                   // they were the same,
                   // ie, no difference for length of smallest
-                  wsprintf(lpd, "Files were the SAME for %I64u bytes,"MCRLF,
+                  sprintf(lpd, "Files were the SAME for %I64u bytes,"MCRLF,
                      offdone );
                   prt(lpd);
                   ptmp = get_nice_number( offk, 0 );
-		   		   wsprintf( lpd, " but %s byte%s (%s) remain"MCRLF
+		   		   sprintf( lpd, " but %s byte%s (%s) remain"MCRLF
                      " in File %d: %s"MCRLF,
                      ptmp,
                      ((offk > 1) ? "s" : ""),
@@ -373,7 +373,7 @@ int	CompFilesB( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
 						g_bDnHeader = TRUE;
 						prt( MCRLF"  Offset: F1 F2 (all in hex)" );
 					}
-					wsprintf( lpd,
+					sprintf( lpd,
 						MCRLF"%08x: %02X %02X",
 						dwi,
 						(lpb1[dwi] & 0xff),
@@ -401,7 +401,7 @@ int	CompFilesB( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
             if( dwk )
             {
                strcpy(lpd, MCRLF"Files are DIFFERENT!"MCRLF );
-				   wsprintf( EndBuf(lpd),
+				   sprintf( EndBuf(lpd),
 					   "And %u byte(s) remain in File %d"MCRLF,
 					   dwj,
 					   dwi );
@@ -409,7 +409,7 @@ int	CompFilesB( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
             else
             {
                strcpy(lpd, MCRLF"Files are nearly the same!"MCRLF );
-				   wsprintf( EndBuf(lpd),
+				   sprintf( EndBuf(lpd),
 					   "But %u byte(s) remain in File %d"MCRLF,
 					   dwj,
 					   dwi );
@@ -486,7 +486,7 @@ int	CompFilesB( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
 						g_bDnHeader = TRUE;
 						prt( MCRLF"  Offset: F1 F2 (all in hex)" );
 					}
-					wsprintf( lpd,
+					sprintf( lpd,
 						MCRLF"%08x: %02X %02X",
 						dwi,
 						(lpb1[dwi] & 0xff),
@@ -511,7 +511,7 @@ int	CompFilesB( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
 				else
 					dwi = 1;
 
-				wsprintf( lpd,
+				sprintf( lpd,
 					MCRLF"But %u byte(s) remain in File %d",
 					dwj,
 					dwi );
@@ -630,7 +630,7 @@ void Process_1_File( WS )
 	{
 		if( VH(ghFile1) )
 		{
-			wsprintf( lpd,
+			sprintf( lpd,
 				" Handle = %d",
 				ghFile1 );
 		}
@@ -639,7 +639,7 @@ void Process_1_File( WS )
 			strcpy(lpd, " FAILED!" );
 		}
 		prt(lpd);
-		wsprintf( lpd,
+		sprintf( lpd,
 			MCRLF"Openning file [%s] ...",
 			gszFile2 );
 		prt(lpd);
@@ -680,7 +680,7 @@ void Process_1_File( WS )
 //		if( VH(pWs->ws_msFile2.mp_Hf) )
 		if( VH(ghFile2) )
 		{
-			wsprintf( lpd,
+			sprintf( lpd,
 				" Handle = %d",
 				ghFile2 );	// pWs->ws_msFile2.mp_Hf );
 		}
@@ -814,7 +814,7 @@ void Process_1_File( WS )
 			{
 				lpf = gszFile1;	// &msFile1.mp_Nm[0];
 			}
-			wsprintf( lpd,
+			sprintf( lpd,
 				MCRLF"ERROR: Unable to open [%s] file!",
 				lpf );
 			prt( lpd );
@@ -867,7 +867,7 @@ void Process_Files( WS )
             i = 1;
             break;
          } else {
-            if( strcmpi(pb3,pb2) == 0 ) {
+            if( STRCMPI(pb3,pb2) == 0 ) {
                i = 1;
                break;
             }
@@ -1064,7 +1064,7 @@ void	AddSysDate( LPTSTR lps, LPSYSTEMTIME lpsst )
 		( lpsst ) )
 	{
       //                   1234567890
-		wsprintf( lps,    // 2001-04-01
+		sprintf( lps,    // 2001-04-01
 			"%04d-%02d-%02d",
 			(lpsst->wYear & 0xffff),
 			(lpsst->wMonth & 0xffff),
@@ -1091,7 +1091,7 @@ void	AddSysTime( LPTSTR lps, LPSYSTEMTIME lpsst )
 	if( ( lps ) &&
 		( lpsst ) )
 	{
-		wsprintf( lps,                //      12345678
+		sprintf( lps,                //      12345678
 			"%2d:%02d:%02d",           // like 13:50:08
 			(lpsst->wHour & 0xffff),
 			(lpsst->wMinute & 0xffff),

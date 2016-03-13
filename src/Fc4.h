@@ -17,13 +17,16 @@
 
 #ifdef WIN32
 #define	   MCRLF	"\r\n"
+#define STRCMPI strcmpi
 #else // !WIN32
 #define	   MCRLF	"\n"
+#define STRCMPI strcmp
 typedef char TCHAR;
 typedef void * HANDLE;
 typedef void * LPVOID;
 typedef int BOOL;
 typedef char * LPTSTR;
+typedef char * LPSTR;
 typedef char * PTSTR;
 typedef unsigned int DWORD;
 typedef int INT;
@@ -93,8 +96,11 @@ typedef struct {
 }MPSTR;
 typedef MPSTR * LPMPSTR;
 
-//#define NULLPMPSTR(a)           memset(a,0,sizeof(MPSTR))
+#ifdef WIN32
 #define NULLPMPSTR(a)	ZeroMemory( a, sizeof(MPSTR) )
+#else // !WIN32
+#define NULLPMPSTR(a)   memset(a,0,sizeof(MPSTR))
+#endif // WIN32 y/n
 
 #define	VH(a)			( ( a ) && ( a != INVALID_HANDLE_VALUE ) )
 #define	Diff(a,b)		( ( a < b ) ? ( b - a ) : ( a - b ) )

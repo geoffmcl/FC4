@@ -355,7 +355,7 @@ int	SetCompType( WS, LPAFILE paf1, LPAFILE paf2, char * lpDest,
 void	prtlast( void )
 {
 	LPTSTR lpd = gszDiag;
-	wsprintf( lpd, "=== %d same until === %s.",
+	sprintf( lpd, "=== %d same until === %s.",
 		giSameCnt,
 		&gszShwLst[ (giPrvShw * MXSHWLC) ] );
 	prtnl(lpd);
@@ -526,7 +526,7 @@ BOOL	CompALine( WS, LPAFILE paf1, LPAFILE paf2 )
 					lpd[k++] = '~';
 				lpd[k] = 0;
 				/* add the F! line number */
-				wsprintf( EndBuf(lpd), "] ln %u with"MCRLF"F2[",
+				sprintf( EndBuf(lpd), "] ln %u with"MCRLF"F2[",
 					paf1->Next.c_dwLns );
 				k = lstrlen(lpd);
 				for( dwlen = 0; dwlen < paf2->Next.c_dwCLen; dwlen++ )
@@ -541,16 +541,16 @@ BOOL	CompALine( WS, LPAFILE paf1, LPAFILE paf2 )
 				if( dwlen == 0 )
 					lpd[k++] = '~';
 				lpd[k] = 0;
-				wsprintf( EndBuf(lpd), "] ln %u Result:",
+				sprintf( EndBuf(lpd), "] ln %u Result:",
 					paf2->Next.c_dwLns );
 			}
 			else
 			{
 				lstrcpy( lpd, MCRLF"Comparing: F1 " );
 				/* add the F! line number */
-				wsprintf( EndBuf(lpd), "ln %u with F2 ",
+				sprintf( EndBuf(lpd), "ln %u with F2 ",
 					paf1->Next.c_dwLns );
-				wsprintf( EndBuf(lpd), "ln %u Result:",
+				sprintf( EndBuf(lpd), "ln %u Result:",
 					paf2->Next.c_dwLns );
 			}
 			SetCompType( pWs, paf1, paf2, lpd, 0 );
@@ -626,13 +626,13 @@ BOOL	DownALine( WS, LPAFILE paf )
 #ifdef	DBGDIAG3
 	if( Dbg13 )
 	{
-//		wsprintf( lpd,
+//		sprintf( lpd,
 //			MCRLF"Down in %s %s (%d)",
 //			GetPN(pWs,paf),
 //			GetsszFP(pWs,paf,index),
 //			gdwDownCnt[index] );
 		*lpd = 0;
-		wsprintf( EndBuf(lpd),
+		sprintf( EndBuf(lpd),
 			MCRLF"Down in %s %s [",
 			GetPN(pWs,paf),
 			GetsszFP(pWs,paf,index) );
@@ -651,7 +651,7 @@ BOOL	DownALine( WS, LPAFILE paf )
 		{
 			strcpy( glpShw, MCRLF"Down in" );
 		}
-		wsprintf( EndBuf(glpShw),
+		sprintf( EndBuf(glpShw),
 			" %s ",
 			GetPN(pWs,paf) );
 	}
@@ -741,7 +741,7 @@ BOOL	DownALine( WS, LPAFILE paf )
 			strcat( lpd, "<blank>" );
 		}
 
-		wsprintf( EndBuf(lpd),
+		sprintf( EndBuf(lpd),
 			"] End at %s %s",
 			GetsszFP(pWs,paf,index),
 			(flg ? "T" : "F" ) );
@@ -751,7 +751,7 @@ BOOL	DownALine( WS, LPAFILE paf )
 	}
 	if( Dbg3 )
 	{
-		wsprintf( EndBuf(glpShw),
+		sprintf( EndBuf(glpShw),
 			"to %s(%s) ",
 			GetsszFP(pWs,paf,index),
 			(flg ? "T" : "F" ) );
@@ -777,7 +777,7 @@ BOOL	UpALine( WS, LPAFILE paf )
 #ifdef	DBGDIAG3
 	if( Dbg13 )
 	{
-		wsprintf( lpd,
+		sprintf( lpd,
 			MCRLF"BUp in %x %s (%d)",
 			paf,
 			GetsszFP(pWs,paf,index),
@@ -832,7 +832,7 @@ BOOL	UpALine( WS, LPAFILE paf )
 #ifdef	DBGDIAG3
 	if( Dbg13 )
 	{
-		wsprintf( lpd,
+		sprintf( lpd,
 			MCRLF"EUp in %x %s %s",
 			paf,
 			GetsszFP(pWs,paf,GetPNi(pWs,paf)),
@@ -1049,7 +1049,7 @@ void	ShowSummary( WS, LPAFILE paf1, LPAFILE paf2 )
 {
 	LPTSTR	lpd = gszDiag;
 	UL		dwp1, dwp2;
-	wsprintf( lpd,
+	sprintf( lpd,
 		MCRLF"Comparing: F1[%s] Ln %u with"
 		MCRLF"           F2 from line %u to %u (%u comps)!"
 		MCRLF,
@@ -1069,7 +1069,7 @@ void	ShowSummary( WS, LPAFILE paf1, LPAFILE paf2 )
 	dwp1 = GetBytes(paf1);
 	dwp2 = GetBytes(paf2);
 
-	wsprintf( EndBuf(lpd),
+	sprintf( EndBuf(lpd),
 		"ShowDiff: F1Ln: %d for %d/%d F2Ln: %d for %d/%d line/bytes.\r\n",
 		paf1->From.c_dwLns,	// From F1 LINE NUMBER
 		g_dwF1Lines,		// for LINES
@@ -1095,7 +1095,7 @@ void	ShowPercentage( WS, LPAFILE paf1, LPAFILE paf2 )
 	UL		dwp1, dwp2;
 
 	// GetsszLine(paf1, 30),
-	wsprintf( lpd,
+	sprintf( lpd,
 		     "OutPutting:F1 from Ln %u to %u (%u lns)"
 		MCRLF"           F2 from ln %u to %u (%u lns)"
 		MCRLF,
@@ -1117,7 +1117,7 @@ void	ShowPercentage( WS, LPAFILE paf1, LPAFILE paf2 )
 	dwp1 = GetPercent(paf1);
 	dwp2 = GetPercent(paf2);
 
-	wsprintf( EndBuf(lpd),
+	sprintf( EndBuf(lpd),
 		"ShowDiff: F1Ln: %d for %d %d F2Ln: %d for %d %d line percent.\r\n",
 		paf1->From.c_dwLns,	// From F1 LINE NUMBER
 		g_dwF1Lines,		// for LINES
@@ -1141,11 +1141,11 @@ void	OutSummary( WS )
 	paf2 = &pWs->ws_AF2;
 	ShowPercentage( pWs, paf1, paf2 );
 
-	wsprintf( lpd,
+	sprintf( lpd,
 		"F1 %s"MCRLF,
 		GetsszFP2( pWs, paf1, 1 ) );
 	prtnl(lpd);
-	wsprintf( lpd,
+	sprintf( lpd,
 		"F2 %s"MCRLF,
 		GetsszFP2( pWs, paf2, 2 ) );
 	prtnl(lpd);
@@ -1182,7 +1182,7 @@ int	SanityCheck2( WS, LPAFILE paf1, LPAFILE paf2 )
 		// appears all ok
 		if( Dbg4 )
 		{
-			wsprintf( lpd,
+			sprintf( lpd,
             "SanityCheck2: Doing %u of F1 and %u of F2"MCRLF,
 				j, k );
 			prt(lpd);
@@ -1195,7 +1195,7 @@ int	SanityCheck2( WS, LPAFILE paf1, LPAFILE paf2 )
 		if( !( paf1->To.c_dwBgn <= lpmps1->mp_Sz ) )
 		{
 			prt( "( paf1->To.c_dwBgn <= lpmps1->mp_Sz ) FAILED"MCRLF );
-			wsprintf( lpd,
+			sprintf( lpd,
 				"paf1->To.c_dwBgn = %u lpmps1->mp_Sz = %u "MCRLF,
 				paf1->To.c_dwBgn,
 				lpmps1->mp_Sz );
@@ -1282,7 +1282,7 @@ int	SanityCheck( WS, LPAFILE paf1, LPAFILE paf2 )
 			// appears all ok
 			if( Dbg4 )
 			{
-				wsprintf( lpd,
+				sprintf( lpd,
                "SanityCheck: Doing %u of F1 and %u of F2"MCRLF,
 					j, k );
 				prt(lpd);
@@ -1406,7 +1406,7 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 					}
 					else if( num == g_dwC )
 					{
-						wsprintf( lpd,
+						sprintf( lpd,
 							"\t*** Omitted %d Lines ***\r\n",
 							(g_dwF1Lines - g_dwMaxLines) );
 						prt(lpd);
@@ -1421,7 +1421,7 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 					num++;
 					if( g_bAddNums )
 					{
-						wsprintf( lpd,
+						sprintf( lpd,
 						"%5u ",
 						num );
 						k = lstrlen(lpd);
@@ -1472,7 +1472,7 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 		num = paf2->From.c_dwLns;
 		if( g_bAddNums )
 		{
-			wsprintf( lpd,
+			sprintf( lpd,
 				"%5u ",
 				num );
 			k = lstrlen(lpd);
@@ -1509,7 +1509,7 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 					}
 					else if( num == g_dwC )
 					{
-						wsprintf( lpd,
+						sprintf( lpd,
 							"\t*** Omitted %d Lines ***.\r\n",
 							(g_dwF2Lines - g_dwMaxLines) );
 						prt(lpd);
@@ -1524,7 +1524,7 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 					num++;
 					if( g_bAddNums )
 					{
-						wsprintf( lpd,
+						sprintf( lpd,
 						"%5u ",
 						num );
 						k = lstrlen(lpd);
@@ -1720,9 +1720,9 @@ void Output_Hex( WS, PTSTR pbuf, off64_t dwlen, off64_t dwcnt )
       strcpy(lpd, MCRLF"Next 1 Byte: (in hex)"MCRLF);
    else {
 #ifdef USE_INT64_TYPE  // FIX20080819 - add some 64-bit support
-      wsprintf( lpd, MCRLF"Next %I64d Bytes: (in hex)"MCRLF, dwmax );
+      sprintf( lpd, MCRLF"Next %I64d Bytes: (in hex)"MCRLF, dwmax );
 #else // !USE_INT64_TYPE
-      wsprintf( lpd, MCRLF"Next %d Bytes: (in hex)"MCRLF, dwmax );
+      sprintf( lpd, MCRLF"Next %d Bytes: (in hex)"MCRLF, dwmax );
 #endif // USE_INT64_TYPE y/n
    }
    prt(lpd);
@@ -1822,7 +1822,7 @@ void	DoEndComp( WS, LPAFILE paf1, LPAFILE paf2, UL * pdwIn )
 			dwmin = paf1->dwSz - paf1->Next.c_dwI;
 			dwcnt = paf1->Next.c_dwI;
 			paf = paf1;
-			wsprintf( lpd,
+			sprintf( lpd,
 				MCRLF"But %u bytes left in F1[%s],",
 				dwmin,
 				&paf1->lpMP->mp_Nm[0] );
@@ -1832,7 +1832,7 @@ void	DoEndComp( WS, LPAFILE paf1, LPAFILE paf2, UL * pdwIn )
 			dwmin = paf2->dwSz - paf2->Next.c_dwI;
 			dwcnt = paf2->Next.c_dwI;
 			paf = paf2;
-			wsprintf( lpd,
+			sprintf( lpd,
 				MCRLF"But %u bytes left in F2[%s],",
 				dwmin,
 				&paf2->lpMP->mp_Nm[0] );			
@@ -1898,7 +1898,7 @@ void	DoEndComp( WS, LPAFILE paf1, LPAFILE paf2, UL * pdwIn )
 			//prt( MCRLF"End - Files are different!" );
          if( g_dwNotExact )
          {
-            wsprintf( lpd, MCRLF"End - Files are different! Using -X%s",
+            sprintf( lpd, MCRLF"End - Files are different! Using -X%s",
                GetsszNX(pWs) );
          }
          else
@@ -1915,7 +1915,7 @@ void	DoEndComp( WS, LPAFILE paf1, LPAFILE paf2, UL * pdwIn )
 		{
 			if( g_dwNotExact )
 			{
-				wsprintf( lpd,
+				sprintf( lpd,
 					MCRLF"End - Files are the same using -X%s!",
 					GetsszNX( pWs ) );
 			}
@@ -1944,7 +1944,7 @@ void Output_Hex( WS, PTSTR pbuf, DWORD dwlen, DWORD dwcnt )
    if( dwmax == 1 )
       strcpy(lpd, MCRLF"Next 1 Byte: (in hex)"MCRLF);
    else
-      wsprintf( lpd, MCRLF"Next %d Bytes: (in hex)"MCRLF, dwmax );
+      sprintf( lpd, MCRLF"Next %d Bytes: (in hex)"MCRLF, dwmax );
    prt(lpd);
    *lpd = 0;
    while(dwmax) {
@@ -2042,7 +2042,7 @@ void	DoEndComp( WS, LPAFILE paf1, LPAFILE paf2, UL * pdwIn )
 			dwmin = paf1->dwSz - paf1->Next.c_dwI;
 			dwcnt = paf1->Next.c_dwI;
 			paf = paf1;
-			wsprintf( lpd,
+			sprintf( lpd,
 				MCRLF"But %u bytes left in F1[%s],",
 				dwmin,
 				&paf1->lpMP->mp_Nm[0] );
@@ -2052,7 +2052,7 @@ void	DoEndComp( WS, LPAFILE paf1, LPAFILE paf2, UL * pdwIn )
 			dwmin = paf2->dwSz - paf2->Next.c_dwI;
 			dwcnt = paf2->Next.c_dwI;
 			paf = paf2;
-			wsprintf( lpd,
+			sprintf( lpd,
 				MCRLF"But %u bytes left in F2[%s],",
 				dwmin,
 				&paf2->lpMP->mp_Nm[0] );			
@@ -2118,7 +2118,7 @@ void	DoEndComp( WS, LPAFILE paf1, LPAFILE paf2, UL * pdwIn )
 			//prt( MCRLF"End - Files are different!" );
          if( g_dwNotExact )
          {
-            wsprintf( lpd, MCRLF"End - Files are different! Using -X%s",
+            sprintf( lpd, MCRLF"End - Files are different! Using -X%s",
                GetsszNX(pWs) );
          }
          else
@@ -2135,7 +2135,7 @@ void	DoEndComp( WS, LPAFILE paf1, LPAFILE paf2, UL * pdwIn )
 		{
 			if( g_dwNotExact )
 			{
-				wsprintf( lpd,
+				sprintf( lpd,
 					MCRLF"End - Files are the same using -X%s!",
 					GetsszNX( pWs ) );
 			}
@@ -2563,7 +2563,7 @@ FindF2Line:
 #ifdef	DBGDIAG2
 			if( Dbg2 )
 			{
-				wsprintf( lpd,
+				sprintf( lpd,
 					MCRLF"Lines different. (%d) Find L1 in F2",
 					dwcnt );
 			}
@@ -2587,7 +2587,7 @@ FindF2Line:
 				if( Dbg1 )
 				{
 					SaveDbg01;
-					wsprintf( lpd,
+					sprintf( lpd,
 						MCRLF"Comparing: F1[%s] Ln %u with"
 						MCRLF"           F2 from line %u to %u (%u comps)!"
 						MCRLF,
@@ -2635,14 +2635,14 @@ FindF2Line:
 					{
 						if( g_dwMatchCnt )
 						{
-							wsprintf( EndBuf(lpd),
+							sprintf( EndBuf(lpd),
 								"Found F1 in F2 at %u plus %u line(s) after.",
 								paf1->Next.c_dwLns,
 								g_dwMatchCnt );
 						}
 						else
 						{
-							wsprintf( EndBuf(lpd),
+							sprintf( EndBuf(lpd),
 								"Found F1 in F2 at %u",
 								paf2->Next.c_dwLns );
 						}
@@ -2651,7 +2651,7 @@ FindF2Line:
 					{
 						if( g_dwMatchCnt )
 						{
-							wsprintf( EndBuf(lpd),
+							sprintf( EndBuf(lpd),
 								"NOT found in F2 with -M%u!",
 								(g_dwMatchCnt + 1 ) );
 						}
@@ -2712,7 +2712,7 @@ FindF2Line:
 					if( gcLastOut != '\n' )
 						strcpy( lpd, "\r\n" );
 					SaveDbg01;
-					wsprintf( EndBuf(lpd),
+					sprintf( EndBuf(lpd),
 						     "Comparing: F2[%s] Ln %u with"
 						MCRLF"           F1 from line %u to %u (%u comps)!"
 						MCRLF,
@@ -2760,14 +2760,14 @@ FindF2Line:
 					{
 						if( g_dwMatchCnt )
 						{
-							wsprintf( EndBuf(lpd),
+							sprintf( EndBuf(lpd),
 								"Found F2 in F1 at %u plus %u after.",
 								paf1->Next.c_dwLns,
 								g_dwMatchCnt );
 						}
 						else
 						{
-							wsprintf( EndBuf(lpd),
+							sprintf( EndBuf(lpd),
 								"Found F2 in F1 at %u",
 								paf1->Next.c_dwLns );
 						}
@@ -2776,7 +2776,7 @@ FindF2Line:
 					{
 						if( g_dwMatchCnt )
 						{
-							wsprintf( EndBuf(lpd),
+							sprintf( EndBuf(lpd),
 								"NOT found in F1 with -M%u!",
 								(g_dwMatchCnt + 1 ) );
 						}
@@ -2828,7 +2828,7 @@ FindF2Line:
 				*lpd = 0;
 				if( gcLastOut != '\n' )
 					strcpy( lpd, "\r\n" );
-				wsprintf( EndBuf(lpd),
+				sprintf( EndBuf(lpd),
 					"Results: 1in2=%s 2in1=%s Min=%d",
 					( flg1 ? "T" : "F" ),
 					( flg2 ? "T" : "F" ),
@@ -2844,7 +2844,7 @@ FindF2Line:
 #ifdef		DBGDIAG5
 				if( Dbg5 )
 				{
-					wsprintf( lpd,
+					sprintf( lpd,
 						MCRLF"Ambiguous Results: Found -"
 						MCRLF"F1[%s] Ln %u in F2 at %u, and"
 						MCRLF"F2[%s] Ln %u in F1 at %u"
@@ -2983,11 +2983,11 @@ FindF2Line:
 #ifdef	DBGDIAG2
 			if( Dbg2 )
 			{
-				wsprintf( lpd,
+				sprintf( lpd,
 					MCRLF"Bump F1 to %s",
 					GetsszFP( pWs, paf1, 1 ) );
 				prt( lpd );
-				wsprintf( lpd,
+				sprintf( lpd,
 					MCRLF"Bump F2 to %s",
 					GetsszFP( pWs, paf2, 2 ) );
 				prt( lpd );
@@ -3086,7 +3086,7 @@ LPTSTR	GetsszFP( WS, LPAFILE paf, int if12 )
 	lpp  = &gsszFPp[j][0];
 	k    = 0;
 
-	wsprintf( lps,
+	sprintf( lps,
 		"C=%u",
 		paf->Next.c_dwLns );
 	c = *lps;
@@ -3129,7 +3129,7 @@ LPTSTR	GetsszFP2( WS, LPAFILE paf, int if12 )
 	lpaf = &gaf[j];
 	lpp  = &gsszFPp[j][0];
 
-	wsprintf( lps,
+	sprintf( lps,
 		"B=%u E=%u L=%u C=%u I=%u CL=%u",
 		paf->Next.c_dwBgn,
 		paf->Next.c_dwEnd,
