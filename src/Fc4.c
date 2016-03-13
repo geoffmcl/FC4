@@ -1079,7 +1079,7 @@ void	AddSysDate( LPTSTR lps, time_t *ptt )
     if (ptt && *ptt) {
         struct tm *pt = localtime(ptt);
         if (pt) {
-            sprintf(EndBuf(lpb),
+            sprintf(lps,
                 "%02d/%02d/%04d",
                 pt->tm_mday,
                 pt->tm_mon,
@@ -1123,7 +1123,7 @@ void	AddSysTime2( LPTSTR lps, time_t *ptt )
     if (ptt && *ptt) {
         struct tm *pt = localtime(ptt);
         if (pt) {
-            sprintf(EndBuf(lps),
+            sprintf(lps,
                 "%02d:%02d:%02d",
                 pt->tm_hour,
                 pt->tm_min,
