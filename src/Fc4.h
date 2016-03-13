@@ -35,6 +35,7 @@ typedef unsigned int DWORD;
 typedef int INT;
 typedef void VOID;
 typedef long LONG;
+typedef unsigned char BYTE;
 #ifndef MAX_PATH
 #define MAX_PATH 264
 #endif

@@ -239,9 +239,14 @@ int	CompFilesB2( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
             dwr2 = BLOCK_SIZE;
          else
             dwr2 = (DWORD)dws2;
+#ifdef WIN32
          if(( ReadFile( ghFile1, b1, dwr1, &dwread1, NULL ) ) &&
             ( ReadFile( ghFile2, b2, dwr2, &dwread2, NULL ) ) &&
             ( dwr1 == dwread1 ) && ( dwr2 == dwread2))
+#else
+        if ( (( dwread1 = fread( b1, 1, dwr1, ghFile1 )) == dwr1 ) &&
+             (( dwread2 = fread( b2, 1, dwr2, ghFile2 )) == dwr2 ) )
+#endif
          {
             if( dwr1 < dwr2 )
                dwmax = dwr1;
