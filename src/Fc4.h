@@ -47,6 +47,7 @@ typedef struct _LIST_ENTRY {
    struct _LIST_ENTRY *Flink;
    struct _LIST_ENTRY *Blink;
 } LIST_ENTRY, *PLIST_ENTRY;
+#define ZeroMemory(b,s) memset(b,0,s)
 #endif // WIN32 y/n
 
 #define	   MEOR  MCRLF
