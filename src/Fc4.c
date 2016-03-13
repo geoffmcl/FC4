@@ -1104,6 +1104,7 @@ void	AddSysDate( LPTSTR lps, time_t *ptt )
 }
 
 #endif
+
 LPTSTR	GetsszDate( void )
 {
 	static TCHAR sszDate[32];
