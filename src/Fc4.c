@@ -296,7 +296,7 @@ int	CompFilesB2( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
                if( dwk )
                {
                   // had some differences
-                  sprintf(lpd, MCRLF"In addition to the above %I64u differences listed,"MCRLF,
+                  sprintf(lpd, MCRLF"In addition to the above %llu differences listed,"MCRLF,
                      dwk );
                   prt(lpd);
                   ptmp = get_nice_number( offk, 0 );
@@ -312,7 +312,7 @@ int	CompFilesB2( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
                {
                   // they were the same,
                   // ie, no difference for length of smallest
-                  sprintf(lpd, "Files were the SAME for %I64u bytes,"MCRLF,
+                  sprintf(lpd, "Files were the SAME for %llu bytes,"MCRLF,
                      offdone );
                   prt(lpd);
                   ptmp = get_nice_number( offk, 0 );
@@ -555,7 +555,7 @@ void Show_File_Information( WS, LPTSTR lpd )
 		gszFile1 );	// &msFile1.mp_Nm[0],
    SETMINSZ(lptmp, MINFNC);
 #ifdef USE_INT64_TYPE  // FIX20080819 - add some 64-bit support
-   sprintf(EndBuf(lpd), "%9I64u ", gi64File1 );	// msFile1.mp_Sz,
+   sprintf(EndBuf(lpd), "%9llu ", gi64File1 );	// msFile1.mp_Sz,
 #else // !USE_INT64_TYPE
    sprintf(EndBuf(lpd), "%9u ", gdwFile1 );	// msFile1.mp_Sz,
 #endif // USE_INT64_TYPE y/n
@@ -567,7 +567,7 @@ void Show_File_Information( WS, LPTSTR lpd )
 		gszFile2 );	// &msFile2.mp_Nm[0],
    SETMINSZ(lptmp, MINFNC);
 #ifdef USE_INT64_TYPE  // FIX20080819 - add some 64-bit support
-   sprintf(EndBuf(lpd), "%9I64u ", gi64File2 );	// msFile2.mp_Sz
+   sprintf(EndBuf(lpd), "%9llu ", gi64File2 );	// msFile2.mp_Sz
 #else // !USE_INT64_TYPE
    sprintf(EndBuf(lpd), "%9u ", gdwFile2 );	// msFile2.mp_Sz
 #endif // USE_INT64_TYPE y/n

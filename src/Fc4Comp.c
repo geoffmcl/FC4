@@ -1720,7 +1720,7 @@ void Output_Hex( WS, PTSTR pbuf, off64_t dwlen, off64_t dwcnt )
       strcpy(lpd, MCRLF"Next 1 Byte: (in hex)"MCRLF);
    else {
 #ifdef USE_INT64_TYPE  // FIX20080819 - add some 64-bit support
-      sprintf( lpd, MCRLF"Next %I64d Bytes: (in hex)"MCRLF, dwmax );
+      sprintf( lpd, MCRLF"Next %lld Bytes: (in hex)"MCRLF, dwmax );
 #else // !USE_INT64_TYPE
       sprintf( lpd, MCRLF"Next %d Bytes: (in hex)"MCRLF, dwmax );
 #endif // USE_INT64_TYPE y/n
@@ -1733,7 +1733,7 @@ void Output_Hex( WS, PTSTR pbuf, off64_t dwlen, off64_t dwcnt )
       dwmax -= dwlen;
    	for( dwi = 0; dwi < dwlen; dwi++ ) {
          if( dwi == 0 ) {
-            sprintf( EndBuf(lpd), "%08I64u: ", dwcnt );
+            sprintf( EndBuf(lpd), "%08llu: ", dwcnt );
          }
          sprintf( EndBuf(lpd),
 		   	"%02X ",

@@ -159,7 +159,7 @@ _TCHAR * get_nice_number( __int64 num, size_t width )
    size_t len, i;
    _TCHAR * pb1 = get_next_buffer();
    _TCHAR * pb2 = get_next_buffer();
-   SPRINTF(pb1, _T("%I64d"), num);
+   SPRINTF(pb1, "%lld", num);
    nice_num( pb2, pb1 );
    len = STRLEN(pb2);
    if( len < width )
@@ -167,7 +167,7 @@ _TCHAR * get_nice_number( __int64 num, size_t width )
       *pb1 = 0;
       i = width - len;  // get pad
       while(i--)
-         STRCAT(pb1, _T(" "));
+         STRCAT(pb1, " ");
       STRCAT(pb1,pb2);
       pb2 = pb1;
    }
@@ -224,20 +224,20 @@ _TCHAR * get_k_num( __int64 i64, int ascii, int type )
 {
    int dotrim = 1;
    _TCHAR * pb = get_next_buffer();
-   _TCHAR * form = _T(" bytes");
+   _TCHAR * form = " bytes";
    unsigned __int64 byts = i64;
    double res;
-   _TCHAR * ffm = _T("%0.20f");  // get 20 digits
+   _TCHAR * ffm = "%0.20f";  // get 20 digits
    if( byts < 1024 ) {
-      SPRINTF(pb, _T("%I64u"), byts);
+      SPRINTF(pb, "%llu", byts);
       dotrim = 0;
    } else if( byts < 1024*1024 ) {
       res = ((double)byts / 1024.0);
-      form = (type ? _T(" KiloBypes") : _T(" KB"));
+      form = (type ? " KiloBypes" : " KB");
       SPRINTF(pb, ffm, res);
    } else if( byts < 1024*1024*1024 ) {
       res = ((double)byts / (1024.0*1024.0));
-      form = (type ? _T(" MegaBypes") : _T(" MB"));
+      form = (type ? " MegaBypes" : " MB");
       SPRINTF(pb, ffm, res);
    } else { // if( byts <  (1024*1024*1024*1024)){
       double val = (double)byts;
@@ -246,7 +246,7 @@ _TCHAR * get_k_num( __int64 i64, int ascii, int type )
       if( val < db2 )
       {
          res = val / db;
-         form = (type ? _T(" GigaBypes") : _T(" GB"));
+         form = (type ? " GigaBypes" : " GB");
          SPRINTF(pb, ffm, res);
       }
       else
@@ -256,7 +256,7 @@ _TCHAR * get_k_num( __int64 i64, int ascii, int type )
          if( val < db2 )
          {
             res = val / db;
-            form = (type ? _T(" TeraBypes") : _T(" TB"));
+            form = (type ? " TeraBypes" : " TB");
             SPRINTF(pb, ffm, res);
          }
          else
@@ -266,7 +266,7 @@ _TCHAR * get_k_num( __int64 i64, int ascii, int type )
             if( val < db2 )
             {
                res = val / db;
-               form = (type ? _T(" PetaBypes") : _T(" PB"));
+               form = (type ? " PetaBypes" : " PB");
                SPRINTF(pb, ffm, res);
             }
             else
@@ -276,14 +276,14 @@ _TCHAR * get_k_num( __int64 i64, int ascii, int type )
                if( val < db2 )
                {
                   res = val / db;
-                  form = (type ? _T(" ExaBypes") : _T(" EB"));
+                  form = (type ? " ExaBypes" : " EB");
                   SPRINTF(pb, ffm, res);
                }
                else
                {
                   db *= 1024.0;  // x7
                   res = val / db;
-                  form = (type ? _T(" ZettaBypes") : _T(" ZB"));
+                  form = (type ? " ZettaBypes" : " ZB");
                   SPRINTF(pb, ffm, res);
                }
             }
