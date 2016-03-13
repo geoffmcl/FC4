@@ -15,6 +15,7 @@
 #endif // WIN32 y/n
 #include    <stdlib.h>
 #include	<stdio.h>
+#include    <time.h>
 #include    "Fc4List.h"
 
 #ifdef WIN32

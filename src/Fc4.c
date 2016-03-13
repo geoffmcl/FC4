@@ -1045,6 +1045,7 @@ BOOL	GetFileInfo( LPMPSTR lpmps )
 
 // **************************************************
 
+#ifdef WIN32
 //typedef struct  _SYSTEMTIME
 //    {
 //    WORD wYear;
@@ -1072,17 +1073,35 @@ void	AddSysDate( LPTSTR lps, LPSYSTEMTIME lpsst )
 
 	}
 }
+#else
+void	AddSysDate( LPTSTR lps, time_t *ptt )
+{
+    if (ptt && *ptt) {
+        struct tm *pt = localtime(ptt);
+        if (pt) {
+            sprintf(EndBuf(lpb),
+                "%02d/%02d/%04d",
+                pt->tm_mday,
+                pt->tm_mon,
+                pt->tm_year);
+        }
+    }
+}
 
+}
+
+#endif
 LPTSTR	GetsszDate( void )
 {
-	LPTSTR lps;
 	static TCHAR sszDate[32];
-
-	lps = &sszDate[0];
-
+	LPTSTR lps = &sszDate[0];
+#ifdef WIN32
 	GetSystemTime( &sst );
 	AddSysDate( lps, &sst );   // put like "2001-04-01" - 10 chars
-
+#else
+    time_t tm = time(0);
+	AddSysDate( lps, &tm );   // put like "2001-04-01" - 10 chars
+#endif
 	return lps;
 }
 
