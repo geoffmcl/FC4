@@ -51,6 +51,7 @@ typedef struct _LIST_ENTRY {
 #endif // WIN32 y/n
 
 #define	   MEOR  MCRLF
+#define mymin(a,b) (((a) < (b)) ? (a) : (b))
 
 #ifdef USE_INT64_TYPE  // FIX20080819 - add some 64-bit support
 #ifndef WIN32

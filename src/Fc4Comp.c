@@ -2818,7 +2818,7 @@ FindF2Line:
          }
 			gbFndIn1 = flg2;
 
-			dwmin = min( ( paf2->Save2.c_dwLns - paf2->Save1.c_dwLns ),
+			dwmin = mymin( ( paf2->Save2.c_dwLns - paf2->Save1.c_dwLns ),
 				( paf1->Save2.c_dwLns - paf2->Save1.c_dwLns ) );
 
 #ifdef	DBGDIAG2
@@ -2860,7 +2860,7 @@ FindF2Line:
 				}
 #endif	// DBGDIAG5
 
-//				dwmin = min( ( paf2->Save2.c_dwLns - paf2->Save1.c_dwLns ),
+//				dwmin = mymin( ( paf2->Save2.c_dwLns - paf2->Save1.c_dwLns ),
 //					( paf1->Save2.c_dwLns - paf2->Save1.c_dwLns ) );
 				if( dwmin )
 				{
