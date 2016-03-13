@@ -270,24 +270,24 @@ int	SetCompType( WS, LPAFILE paf1, LPAFILE paf2, char * lpDest,
 			( paf2->Next.c_dwCLen == 0 ) )
 		{
 			/* both blanks */
-			lstrcat( lpd, gszJCrLf );
+			strcat( lpd, gszJCrLf );
 			/* leave as equal */
 		}
 		else
 		{
 			if( paf1->Next.c_dwCLen == 0 )	// 1 blank
 			{
-				lstrcat( lpd, "1 CrLf" );
+				strcat( lpd, "1 CrLf" );
 				i = 1;
 			}
 			else if( paf2->Next.c_dwCLen == 0 )
 			{
-				lstrcat( lpd, "2 CrLf" );
+				strcat( lpd, "2 CrLf" );
 				i = 2;
 			}
 			else
 			{
-				lstrcat( lpd, gszDiff );
+				strcat( lpd, gszDiff );
 				i = 3;
 			}
 		}
@@ -298,21 +298,21 @@ int	SetCompType( WS, LPAFILE paf1, LPAFILE paf2, char * lpDest,
 			( paf2->Next.c_dwCLen == 0 ) )
 		{
 			// both blanks
-			lstrcat( lpd, gszjcrlf );
+			strcat( lpd, gszjcrlf );
 		}
 		else
 		{
 			if( paf1->Next.c_dwCLen == 0 )	// 1 blank
 			{
-				lstrcat( lpd, "1 CrLf" );
+				strcat( lpd, "1 CrLf" );
 			}
 			else if( paf2->Next.c_dwCLen == 0 )
 			{
-				lstrcat( lpd, "2 CrLf" );
+				strcat( lpd, "2 CrLf" );
 			}
 			else
 			{
-				lstrcat( lpd, gszsame );
+				strcat( lpd, gszsame );
 			}
 		}
 	}
@@ -1302,8 +1302,8 @@ void Out_File_Name( WS, LPMPSTR lpmps )
 	else
 		lpl = &gszLead[0];	/* include MCRLF */
 	strcpy( lpd, lpl );
-	lstrcat( lpd, &lpmps->mp_Nm[0] );
-	lstrcat( lpd, gszMCrLf );
+	strcat( lpd, &lpmps->mp_Nm[0] );
+	strcat( lpd, gszMCrLf );
 	prt(lpd);
 
 }
@@ -1354,8 +1354,8 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 #endif	// DBGDIAG4
 
 		//strcpy( lpd, MCRLF"----------" );
-		//lstrcat( lpd, &lpmps1->mp_Nm[0] );
-		//lstrcat( lpd, MCRLF );
+		//strcat( lpd, &lpmps1->mp_Nm[0] );
+		//strcat( lpd, MCRLF );
       Out_File_Name( pWs, lpmps1 );
 
 		// Output of FILE 1 section
@@ -1396,7 +1396,7 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 				if( !dncr )
 				{
 					lpd[k] = 0;
-					lstrcat( lpd, MCRLF );
+					strcat( lpd, MCRLF );
 
 					// OUTPUT THE LINE
 					// ====================================
@@ -1449,8 +1449,8 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 
 		lpd[k] = 0;
 //		if( !dncr )
-//			lstrcat( lpd, MCRLF );
-		//lstrcat( lpd, MCRLF );
+//			strcat( lpd, MCRLF );
+		//strcat( lpd, MCRLF );
 		if( l )
 			prt(lpd);
 
@@ -1459,11 +1459,11 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 		// ==================
 		*lpd = 0;
 		//strcpy( lpd, MCRLF"----------" );
-		//lstrcat( lpd, &lpmps2->mp_Nm[0] );
-		//lstrcat( lpd, MCRLF );
+		//strcat( lpd, &lpmps2->mp_Nm[0] );
+		//strcat( lpd, MCRLF );
 		strcpy( lpd, gszLead );
-		lstrcat( lpd, &lpmps2->mp_Nm[0] );
-		lstrcat( lpd, gszMCrLf );
+		strcat( lpd, &lpmps2->mp_Nm[0] );
+		strcat( lpd, gszMCrLf );
 		prt(lpd);
 		k = 0;
 		// Get length in FILE 2
@@ -1499,7 +1499,7 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 				if( !dncr )
 				{
 					lpd[k] = 0;
-					lstrcat( lpd, MCRLF );
+					strcat( lpd, MCRLF );
 					//prt(lpd);
 					// OUTPUT THE LINE
 					// ====================================
@@ -1555,11 +1555,11 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 			prt(lpd);
 
 //		if( !dncr )
-//			lstrcat( lpd, MCRLF );
+//			strcat( lpd, MCRLF );
 		strcpy( lpd, gszTail );
-		//lstrcat( lpd, MCRLF );
-		//lstrcat( lpd, "-----------------------------------------------" );
-		//lstrcat( lpd, MCRLF );
+		//strcat( lpd, MCRLF );
+		//strcat( lpd, "-----------------------------------------------" );
+		//strcat( lpd, MCRLF );
 		prt(lpd);
 
 	}
@@ -3260,9 +3260,9 @@ LPTSTR	GetsszNX( WS )
 	lps = &sszNX[0];
 	*lps = 0;
 	if( g_bSkipSpaces )   // = ( g_dwNotExact & x_SkipSpaces )
-		lstrcat(lps, "1" );
+		strcat(lps, "1" );
 	if( g_bIgnoreCase )
-		lstrcat(lps, "2" );
+		strcat(lps, "2" );
 
 	return lps;
 }

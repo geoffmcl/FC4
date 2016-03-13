@@ -603,8 +603,8 @@ int ProcessCommand( WS, int argc, char * argv[] )
 			if( ( CmdLen + k + 1 ) < MXCMDBUF )
 			{
 				if( CmdLen )
-					lstrcat( szCmd, " " );
-				lstrcat( szCmd, cp );
+					strcat( szCmd, " " );
+				strcat( szCmd, cp );
 				CmdLen = strlen( szCmd );
 			}
 			if( c == '"' )
