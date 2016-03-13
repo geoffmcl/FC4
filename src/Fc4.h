@@ -12,6 +12,7 @@
 #else   // !WIN32
 #include    <inttypes.h>
 #include    <string.h>  // for strlen, ...
+#include    <ctype.h>   // for toupper
 #endif // WIN32 y/n
 #include    <stdlib.h>
 #include	<stdio.h>

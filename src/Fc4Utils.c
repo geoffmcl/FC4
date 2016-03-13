@@ -301,4 +301,30 @@ _TCHAR * get_k_num( __int64 i64, int ascii, int type )
    return pb;
 }
 
+#ifdef _MSC_VER
+#define M_IS_DIR _S_IFDIR
+#define STAT64 _stat64
+#else // !_MSC_VER
+#define M_IS_DIR S_IFDIR
+#define STAT64 stat
+#endif
+
+static struct STAT64 buf64;
+__int64 get_last_file_size() { return buf64.st_size; }
+time_t get_last_file_time() { return buf64.st_mtime; }
+int is_file_or_directory( char *path )
+{
+    if (!path)
+        return 0;
+	if (STAT64(path,&buf64) == 0)
+	{
+		if (buf64.st_mode & M_IS_DIR)
+			return 2;
+		else
+			return 1;
+	}
+	return 0;
+}
+
+
 // eof - Fc4Utils.c

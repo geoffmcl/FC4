@@ -43,6 +43,9 @@ extern _TCHAR * get_nice_number( __int64 num, size_t width );
 extern void nice_num( _TCHAR * dst, _TCHAR * src ); // get nice number, with commas
 extern _TCHAR * get_k_num( __int64 i64, int ascii, int type );
 
+extern int is_file_or_directory( char *path );  // 0 == invalid 1 == file, 2 == directory
+extern __int64 get_last_file_size();
+extern time_t get_last_file_time();
 
 #endif // #ifndef  _Fc4Utils_hhh_
 // eof - Fc4Utils.h

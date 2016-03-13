@@ -791,8 +791,10 @@ int ProcessCommand( WS, int argc, char * argv[] )
 	return gIRet;
 }
 
+
 int   is_valid_path( PTSTR pf )
 {
+#if (defined(WIN32) && defined(USE_NATIVE_WIN32))
    WIN32_FIND_DATA   fd;
    HANDLE   hFind = FindFirstFile( pf, &fd );
    if( VH(hFind) ) {
@@ -803,6 +805,9 @@ int   is_valid_path( PTSTR pf )
       return 1;
    }
    return 0;
+#else
+    return is_file_or_directory(pf);
+#endif
 }
 
 // eof - Fc4Help.c
