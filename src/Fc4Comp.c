@@ -511,7 +511,7 @@ BOOL	CompALine( WS, LPAFILE paf1, LPAFILE paf2 )
 			if( gfAddData )
 			{
 				strcpy( lpd, MCRLF"Comparing:"MCRLF"F1[" );
-				k = lstrlen(lpd);
+				k = strlen(lpd);
 				for( dwlen = 0; dwlen < paf1->Next.c_dwCLen; dwlen++ )
 				{
 					if( lpb1[dwlen] < ' ' )
@@ -528,7 +528,7 @@ BOOL	CompALine( WS, LPAFILE paf1, LPAFILE paf2 )
 				/* add the F! line number */
 				sprintf( EndBuf(lpd), "] ln %u with"MCRLF"F2[",
 					paf1->Next.c_dwLns );
-				k = lstrlen(lpd);
+				k = strlen(lpd);
 				for( dwlen = 0; dwlen < paf2->Next.c_dwCLen; dwlen++ )
 				{
 					if( lpb2[dwlen] < ' ' )
@@ -1424,7 +1424,7 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 						sprintf( lpd,
 						"%5u ",
 						num );
-						k = lstrlen(lpd);
+						k = strlen(lpd);
 					}
 				}
 				if( tc == '\r' )
@@ -1475,7 +1475,7 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 			sprintf( lpd,
 				"%5u ",
 				num );
-			k = lstrlen(lpd);
+			k = strlen(lpd);
 		}
 		l = 0;
 		g_dwB1 = num;
@@ -1527,7 +1527,7 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 						sprintf( lpd,
 						"%5u ",
 						num );
-						k = lstrlen(lpd);
+						k = strlen(lpd);
 					}
 				}
 				if( tc == '\r' )

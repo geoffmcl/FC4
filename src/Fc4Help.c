@@ -152,7 +152,7 @@ DWORD	GetHex( LPTSTR lps )
 	k = 0;
 	neg = 0;
 	if( ( lps ) &&
-		( j = lstrlen(lps) ) )
+		( j = strlen(lps) ) )
 	{
 		for( i = 0; i < j; i++ )
 		{
@@ -240,7 +240,7 @@ DWORD	GetNum2( WS, LPTSTR lps )
 	k = 0;
 	neg = 0;
 	if( ( lps              ) &&
-		 ( j = lstrlen(lps) ) )
+		 ( j = strlen(lps) ) )
 	{
 		for( i = 0; i < j; i++ )
 		{
@@ -315,7 +315,7 @@ int	GetNum( LPTSTR lps )
 	iNum = 0;
 	k = 0;
 	if( ( lps ) &&
-		( j = lstrlen(lps) ) )
+		( j = strlen(lps) ) )
 	{
 		for( i = 0; i < j; i++ )
 		{
@@ -595,20 +595,20 @@ int ProcessCommand( WS, int argc, char * argv[] )
 	{
 		if( ( cp = argv[i] ) &&
 			( c = *cp ) &&
-			( k = lstrlen(cp) ) )
+			( k = strlen(cp) ) )
 		{
 			if( ( CmdLen + k + 1 ) < MXCMDBUF )
 			{
 				if( CmdLen )
 					lstrcat( szCmd, " " );
 				lstrcat( szCmd, cp );
-				CmdLen = lstrlen( szCmd );
+				CmdLen = strlen( szCmd );
 			}
 			if( c == '"' )
 			{
 				cp++;
 				strcpy( lpd, cp );
-				if( ( k = lstrlen(lpd) ) &&
+				if( ( k = strlen(lpd) ) &&
 					( k > 1 ) )
 				{
 					k--;
@@ -631,7 +631,7 @@ int ProcessCommand( WS, int argc, char * argv[] )
 			{
 				strcpy( lpd, cp );
 			}
-			if( ( k = lstrlen(lpd) ) &&
+			if( ( k = strlen(lpd) ) &&
 				( c = *lpd ) )
 			{
 				switch( c )
