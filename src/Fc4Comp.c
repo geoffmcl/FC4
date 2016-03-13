@@ -3096,7 +3096,8 @@ LPTSTR	GetsszFP( WS, LPAFILE paf, int if12 )
 	}
 	else
 	{
-		if( i = strlen(lps) )
+		i = strlen(lps);
+		if(i)
 		{
 			while( i )
 			{
@@ -3143,7 +3144,8 @@ LPTSTR	GetsszFP2( WS, LPAFILE paf, int if12 )
 		strcpy( lpp, lps );
 		if( lpaf->Next.c_dwBgn == paf->Next.c_dwBgn )
 		{
-			if( i = strlen(lps) )
+			i = strlen(lps);
+			if (i)
 			{
 				k = 0;
 				while( i-- )
@@ -3167,7 +3169,8 @@ LPTSTR	GetsszFP2( WS, LPAFILE paf, int if12 )
 		/* ========================================== */
 		if( lpaf->Next.c_dwEnd == paf->Next.c_dwEnd )
 		{
-			if( i = strlen(lps) )
+			i = strlen(lps);
+			if(i)
 			{
 				k = 0;
 				while( i-- )
@@ -3203,7 +3206,8 @@ LPTSTR	GetsszFP2( WS, LPAFILE paf, int if12 )
 	}
 	else
 	{
-		if( i = strlen(lps) )
+		i = strlen(lps);
+		if(i)
 		{
 			while( i )
 			{

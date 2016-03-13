@@ -108,7 +108,7 @@ void	oi( LPTSTR lps )
 {
 	TCHAR	buf[MXIO+8];
 	int		i, j, k;
-	char	c, d;
+	char	c, d = 0;
 
 //		( VH(ghOutFil) ) )
 	if( ( lps ) &&
