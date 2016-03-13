@@ -18,8 +18,10 @@ PLE   Add_2_List( PLE ph, PTSTR pf )
    return NULL;
 }
 
+
 void Expand_Folder( PLE ph, PTSTR pf )
 {
+#ifdef WIN32
    WIN32_FIND_DATA fd;
    size_t len = strlen(pf);
    PTSTR pb;
@@ -53,6 +55,9 @@ void Expand_Folder( PLE ph, PTSTR pf )
    } while( FindNextFile(hFind, &fd) );
    FindClose(hFind);
    MFREE(pb);
+#else
+    // TODO: Expand FOLDER into files
+#endif
 }
 
 // eof - Fc4List.c
