@@ -686,7 +686,7 @@ void Process_1_File( WS )
 		}
 		else
 		{
-			lstrcpy(lpd, " FAILED!" );
+			strcpy(lpd, " FAILED!" );
 		}
 		prt(lpd);
       *lpd = 0;
@@ -1101,10 +1101,8 @@ void	AddSysTime( LPTSTR lps, LPSYSTEMTIME lpsst )
 
 LPTSTR	GetsszTime( void )
 {
-	LPTSTR lps;
 	static TCHAR sszTime[32];
-
-	lps = &sszTime[0];
+	LPTSTR lps = &sszTime[0];
 
 	GetSystemTime( &sst );
 	AddSysTime( lps, &sst );   // add 8 like "13:50:08"

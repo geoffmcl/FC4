@@ -607,7 +607,7 @@ int ProcessCommand( WS, int argc, char * argv[] )
 			if( c == '"' )
 			{
 				cp++;
-				lstrcpy( lpd, cp );
+				strcpy( lpd, cp );
 				if( ( k = lstrlen(lpd) ) &&
 					( k > 1 ) )
 				{
@@ -629,7 +629,7 @@ int ProcessCommand( WS, int argc, char * argv[] )
 			}
 			else
 			{
-				lstrcpy( lpd, cp );
+				strcpy( lpd, cp );
 			}
 			if( ( k = lstrlen(lpd) ) &&
 				( c = *lpd ) )
@@ -704,7 +704,7 @@ int ProcessCommand( WS, int argc, char * argv[] )
 
 						case 'O':
 							lps++;
-							lstrcpy( szOut, lps );
+							strcpy( szOut, lps );
 							break;
 
 #ifdef	ADDPREV

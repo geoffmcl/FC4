@@ -510,7 +510,7 @@ BOOL	CompALine( WS, LPAFILE paf1, LPAFILE paf2 )
 		{
 			if( gfAddData )
 			{
-				lstrcpy( lpd, MCRLF"Comparing:"MCRLF"F1[" );
+				strcpy( lpd, MCRLF"Comparing:"MCRLF"F1[" );
 				k = lstrlen(lpd);
 				for( dwlen = 0; dwlen < paf1->Next.c_dwCLen; dwlen++ )
 				{
@@ -546,7 +546,7 @@ BOOL	CompALine( WS, LPAFILE paf1, LPAFILE paf2 )
 			}
 			else
 			{
-				lstrcpy( lpd, MCRLF"Comparing: F1 " );
+				strcpy( lpd, MCRLF"Comparing: F1 " );
 				/* add the F! line number */
 				sprintf( EndBuf(lpd), "ln %u with F2 ",
 					paf1->Next.c_dwLns );
@@ -583,11 +583,11 @@ LPTSTR	GetPN( WS, LPAFILE paf )
 
 	lps = &sszFN[0];
 	if( paf1 == paf )
-		lstrcpy( lps, "F1" );
+		strcpy( lps, "F1" );
 	else if( paf2 == paf )
-		lstrcpy( lps, "F2" );
+		strcpy( lps, "F2" );
 	else
-		lstrcpy( lps, "F???" );
+		strcpy( lps, "F???" );
 	return lps;
 }
 
@@ -1301,7 +1301,7 @@ void Out_File_Name( WS, LPMPSTR lpmps )
 		lpl = &gszLead[2];	/* Skip beginning CR/LF */
 	else
 		lpl = &gszLead[0];	/* include MCRLF */
-	lstrcpy( lpd, lpl );
+	strcpy( lpd, lpl );
 	lstrcat( lpd, &lpmps->mp_Nm[0] );
 	lstrcat( lpd, gszMCrLf );
 	prt(lpd);
@@ -1353,7 +1353,7 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
       SanityCheck2( pWs, paf1, paf2 );
 #endif	// DBGDIAG4
 
-		//lstrcpy( lpd, MCRLF"----------" );
+		//strcpy( lpd, MCRLF"----------" );
 		//lstrcat( lpd, &lpmps1->mp_Nm[0] );
 		//lstrcat( lpd, MCRLF );
       Out_File_Name( pWs, lpmps1 );
@@ -1458,10 +1458,10 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 		// Output from File 2
 		// ==================
 		*lpd = 0;
-		//lstrcpy( lpd, MCRLF"----------" );
+		//strcpy( lpd, MCRLF"----------" );
 		//lstrcat( lpd, &lpmps2->mp_Nm[0] );
 		//lstrcat( lpd, MCRLF );
-		lstrcpy( lpd, gszLead );
+		strcpy( lpd, gszLead );
 		lstrcat( lpd, &lpmps2->mp_Nm[0] );
 		lstrcat( lpd, gszMCrLf );
 		prt(lpd);
@@ -1556,7 +1556,7 @@ void	ShowDiff( WS, LPAFILE paf1, LPAFILE paf2 )
 
 //		if( !dncr )
 //			lstrcat( lpd, MCRLF );
-		lstrcpy( lpd, gszTail );
+		strcpy( lpd, gszTail );
 		//lstrcat( lpd, MCRLF );
 		//lstrcat( lpd, "-----------------------------------------------" );
 		//lstrcat( lpd, MCRLF );
@@ -1921,7 +1921,7 @@ void	DoEndComp( WS, LPAFILE paf1, LPAFILE paf2, UL * pdwIn )
 			}
 			else
 			{
-				lstrcpy( lpd, MCRLF"End - Files are exactly the same!" );
+				strcpy( lpd, MCRLF"End - Files are exactly the same!" );
 			}
 			prt(lpd);
 		}
@@ -2141,7 +2141,7 @@ void	DoEndComp( WS, LPAFILE paf1, LPAFILE paf2, UL * pdwIn )
 			}
 			else
 			{
-				lstrcpy( lpd, MCRLF"End - Files are exactly the same!" );
+				strcpy( lpd, MCRLF"End - Files are exactly the same!" );
 			}
 			prt(lpd);
 		}
