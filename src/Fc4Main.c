@@ -36,7 +36,7 @@ int main( int argc, char * argv[] )
 	LPFC4WS	pWs;
 	INT      i;
 
-   glpWs = LocalAlloc( LPTR, sizeof(FC4WS) );
+   glpWs = MALLOC( sizeof(FC4WS) );
 	if( glpWs )	{
 		pWs = glpWs;
 		ZeroMemory( pWs, sizeof(FC4WS) );
