@@ -400,7 +400,7 @@ BOOL	GetX( WS, LPTSTR lps )
 HANDLE	OpenForRead( LPTSTR lpf )
 {
 	HANDLE	hFile;
-
+#ifdef WIN32
 	hFile = CreateFile( lpf,	// pointer to name of the file
 		GENERIC_READ,			// access (read-write) mode
 		0,						// share mode
@@ -409,6 +409,9 @@ HANDLE	OpenForRead( LPTSTR lpf )
 		FILE_ATTRIBUTE_NORMAL,	// file attributes
 		NULL );					// handle to file with attributes to 
                                // copy
+#else
+    hFile = fopen(lpf,"r");
+#endif
 	return hFile;
 }
 
