@@ -1118,14 +1118,32 @@ void	AddSysTime( LPTSTR lps, LPSYSTEMTIME lpsst )
 	}
 }
 
+void	AddSysTime2( LPTSTR lps, time_t *ptt )
+{
+    if (ptt && *ptt) {
+        struct tm *pt = localtime(ptt);
+        if (pt) {
+            sprintf(EndBuf(lps),
+                "%02d:%02d:%02d",
+                pt->tm_hour,
+                pt->tm_min,
+                pt->tm_sec);
+        }
+    }
+
+}
+
 LPTSTR	GetsszTime( void )
 {
 	static TCHAR sszTime[32];
 	LPTSTR lps = &sszTime[0];
-
+#ifdef WIN32
 	GetSystemTime( &sst );
 	AddSysTime( lps, &sst );   // add 8 like "13:50:08"
-
+#else
+    time_t tm = time(0);
+	AddSysTime2( lps, &tm );   // put like "12:34:56" - 8 chars
+#endif
 	return lps;
 }
 
