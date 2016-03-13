@@ -98,7 +98,7 @@ void	oi( LPTSTR lps )
 
 //		( VH(ghOutFil) ) )
 	if( ( lps ) &&
-		( i = lstrlen(lps) ) )
+		( ( i = strlen(lps) ) > 0) )
 	{
 		k = 0;
 		for( j = 0; j < i; j++ )

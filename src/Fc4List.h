@@ -73,6 +73,7 @@
 //      );
 //
 
+#ifdef WIN32
 #define RemoveEntryList(Entry) {\
     PLIST_ENTRY _EX_Blink;\
     PLIST_ENTRY _EX_Flink;\
@@ -83,6 +84,17 @@
     _EX_Blink->Flink = _EX_Flink;\
     _EX_Flink->Blink = _EX_Blink;\
     _RT_Flink;}
+#else // !WIN32
+#define RemoveEntryList(Entry) {\
+    PLIST_ENTRY _EX_Blink;\
+    PLIST_ENTRY _EX_Flink;\
+    PLIST_ENTRY _RT_Flink;\
+    _EX_Flink = (Entry)->Flink;\
+    _EX_Blink = (Entry)->Blink;\
+	_RT_Flink = _EX_Flink->Flink;\
+    _EX_Blink->Flink = _EX_Flink;\
+    _EX_Flink->Blink = _EX_Blink;}
+#endif // WIN32 y/n
 
 //
 //  VOID
