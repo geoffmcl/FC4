@@ -2,6 +2,11 @@
 # CMakeLists.txt, generated gencmake.pl, on 2016/03/12 19:31:40
 cmake_minimum_required( VERSION 2.8.6 )
 
+############################################################
+include (CheckIncludeFile)
+# include (CheckFunctionExists)
+############################################################
+
 # CMakeScripts or use the ones that come by default with CMake.
 # set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMakeModules ${CMAKE_MODULE_PATH})
 
@@ -46,10 +51,12 @@ set( CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT
 set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${WARNING_FLAGS} ${MSVC_FLAGS} -D_REENTRANT" )
 set( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${MSVC_LD_FLAGS}" )
 
+check_include_file(dirent.h HAVE_DIRENT_H)
+
 # configuration file, if needed
-# configure_file( ${CMAKE_SOURCE_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/config.h )
-# add_definitions( -DHAVE_CONFIG_H )
-# include_directories( ${CMAKE_BINARY_DIR} )
+configure_file( ${CMAKE_SOURCE_DIR}/src/config.h.cmake ${CMAKE_BINARY_DIR}/config.h )
+add_definitions( -DHAVE_CONFIG_H )
+include_directories( ${CMAKE_BINARY_DIR} )
 
 #if(BUILD_SHARED_LIB)
 #   set(LIB_TYPE SHARED)
@@ -92,7 +99,14 @@ set(${name}_HDRS
     ${dir}/Fc4List.h
     ${dir}/Fc4Utils.h
     ${dir}/Fc4Vers.h
+    ${CMAKE_BINARY_DIR}/config.h
     )
+# if (WIN32)
+if (NOT HAVE_DIRENT_H)
+    list(APPEND ${name}_SRCS ${dir}/dirent/dirent.c)
+    list(APPEND ${name}_HDRS ${dir}/dirent/dirent.h)
+    include_directories( ${dir}/dirent )
+endif ()    
 add_executable( ${name} ${${name}_SRCS} ${${name}_HDRS} )
 if (add_LIBS)
     target_link_libraries( ${name} ${add_LIBS} )

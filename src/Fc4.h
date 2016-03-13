@@ -302,7 +302,7 @@ typedef struct tagFC4WS {  /* work structure */
 	DWORD	ws_dwDbgSave;	/* Save and RESTORE */
 	DWORD	ws_dwSaveDbg;	/* g_dwSaveDbg	= W.ws_dwSaveDbg */
 	DWORD	ws_dwMinDbg;	/* g_dwMinDbg	= W.ws_dwMinDbg  */
-
+    DWORD   ws_dwCmpCount;    /* g_dwCmpCount */
 	BOOL	ws_bReverse;   // -R = reverse file names
 	int	ws_iPrevCnt;
 	BOOL	ws_bAddNums;
@@ -372,6 +372,7 @@ extern   LPFC4WS     glpWs;
 #define		g_dwDbgSave		W.ws_dwDbgSave
 #define		g_dwSaveDbg		W.ws_dwSaveDbg
 #define		g_dwMinDbg		W.ws_dwMinDbg
+#define     g_dwCmpCount    W.ws_dwCmpCount
 
 #define		g_bReverse		W.ws_bReverse
 #define		g_iPrevCnt		W.ws_iPrevCnt

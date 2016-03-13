@@ -1,13 +1,20 @@
 // Fc4List.c
 // handle list functions
 #include "Fc4.h"
+#include <dirent.h>
+
+#ifdef WIN32
+#define PATH_SEP "\\"
+#else
+#define PATH_SEP "/"
+#endif
 
 PLE   Add_2_List( PLE ph, PTSTR pf )
 {
    size_t len = strlen(pf);
    PTSTR pb;
    if( len > 0 ) {
-      PLE pn = MALLOC( sizeof(FL) + len );
+      PLE pn = (PLE)MALLOC( sizeof(FL) + len );
       CHECKMEM(pn);
       ZeroMemory(pn, (sizeof(FL) + len));
       pb = (PTSTR) (pn + 1);
@@ -21,7 +28,7 @@ PLE   Add_2_List( PLE ph, PTSTR pf )
 
 void Expand_Folder( PLE ph, PTSTR pf )
 {
-#ifdef WIN32
+#if (defined(WIN32) && defined(USE_NATIVE_WIN32))
    WIN32_FIND_DATA fd;
    size_t len = strlen(pf);
    PTSTR pb;
@@ -57,6 +64,38 @@ void Expand_Folder( PLE ph, PTSTR pf )
    MFREE(pb);
 #else
     // TODO: Expand FOLDER into files
+    size_t len = strlen(pf);
+    PTSTR pb;
+    DIR *dp;
+    struct dirent *pe;
+
+    pb = (PTSTR) MALLOC(264);
+    CHECKMEM(pb);
+    strcpy(pb,pf);
+#ifdef WIN32
+    Ensure_DOS_Separator(pb);
+#else
+    Ensure_UNIX_Separator(pb);
+#endif
+    dp = opendir(pb);
+    if (dp) {
+        while ((pe = readdir(dp)) != 0) {
+            if (strcmp(pe->d_name,".") == 0)
+                continue;
+            if (strcmp(pe->d_name,"..") == 0)
+                continue;
+            pb[len] = 0;
+            strcat(pb,PATH_SEP);
+            strcat(pb,pe->d_name);
+            if (is_file_or_directory(pb) == 1) {
+                Add_2_List( ph, pb );
+            }
+        }
+
+        closedir(dp);
+    }
+    MFREE(pb);
+
 #endif
 }
 

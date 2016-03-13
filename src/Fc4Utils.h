@@ -23,6 +23,7 @@
 extern PTSTR GetNxtBuf( VOID );
 extern DWORD GetNxtBufSize( VOID );
 extern void  Ensure_DOS_Separator( PTSTR pf );
+extern void  Ensure_UNIX_Separator( PTSTR pf );
 extern PTSTR   RetFileTitle( LPTSTR lpf );
 extern INT  HasChar( PTSTR lpf, TCHAR c );
 extern INT  HasDot( PTSTR lpf );

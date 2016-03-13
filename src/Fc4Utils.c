@@ -39,6 +39,20 @@ void  Ensure_DOS_Separator( PTSTR pf )
    }
 }
 
+void  Ensure_UNIX_Separator( PTSTR pf )
+{
+   size_t len = strlen(pf);
+   size_t i;
+   for( i = 0; i < len; i++ )
+   {
+      int   c = pf[i];
+      if( c == '\\' ) {
+         pf[i] = '/';
+      }
+   }
+}
+
+
 PTSTR   RetFileTitle( LPTSTR lpf )
 {
    PTSTR   lpb = GetNxtBuf();

@@ -895,7 +895,7 @@ void Process_Files( WS )
    PFL   pf1, pf2;
    PTSTR pb1, pb2, pb3;
    INT   icnt1, icnt2;
-   INT   order = 0;
+   INT   order = 0; // set if we just have one to one compare
 
    // FIX20060910 - handle simple case of 2 files to compare
    ListCount2(ph1, &icnt1);
@@ -929,9 +929,14 @@ void Process_Files( WS )
          }
       }
       if(( i > 0 )&&(pf1)&&(pf2)) {
-         strcpy( gszFile1, pf1->name );
-         strcpy( gszFile2, pf2->name );
-         Process_1_File( pWs );
+          g_dwCmpCount++;
+          strcpy( gszFile1, pf1->name );
+          strcpy( gszFile2, pf2->name );
+          if (!order) {
+             sprintf(lpd,"%d: %s %s", g_dwCmpCount, gszFile1, gszFile2);
+             prt(lpd);
+          }
+          Process_1_File( pWs );
       } else {
          if(VERBAL) {
             if(pf1) {
@@ -1049,7 +1054,7 @@ BOOL	GetMapFile( LPMPSTR lpmps )
       }
 	}
 #else
-    // TODO: TEST: memory map file
+    // TEST: memory map file
     LPSTR eb = gszLastErr;
     if( lpmps )
        hf = lpmps->mp_Hf;
@@ -1097,7 +1102,7 @@ BOOL	KillMapFile( LPMPSTR lpmps )
 		lpmps->mp_Hd = 0;
 	}
 #else
-    // TODO: Unmap file
+    // TEST: Unmap file
 	LPVOID		pmv;
 	if( lpmps )
 	{
