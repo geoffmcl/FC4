@@ -894,10 +894,11 @@ void Process_Files( WS )
 char *
 SetLastErrorText( DWORD dwLastError )
 {
+   LPSTR eb = gszLastErr;
+#ifdef WIN32
    HMODULE hModule = NULL; // default to system source
    LPSTR MessageBuffer = NULL;
    DWORD dwBufferLength = 0;
-   LPSTR eb = gszLastErr;
    DWORD dwFormatFlags = FORMAT_MESSAGE_ALLOCATE_BUFFER |
         FORMAT_MESSAGE_IGNORE_INSERTS |
         FORMAT_MESSAGE_FROM_SYSTEM ;
@@ -950,7 +951,11 @@ SetLastErrorText( DWORD dwLastError )
    // If we loaded a message source, unload it.
    if(hModule != NULL)
       FreeLibrary(hModule);
-
+#else
+   // TODO: File error
+   *eb = 0;
+   strcpy(eb,"File Error");
+#endif
    return eb;
 }
 
@@ -961,6 +966,7 @@ SetLastErrorText( DWORD dwLastError )
 BOOL	GetMapFile( LPMPSTR lpmps )
 {
 	BOOL	flg = FALSE;
+#ifdef WIN32
 	HANDLE	hf = 0;
 	HANDLE	hmv;
 	LPVOID	pmv;
@@ -987,22 +993,28 @@ BOOL	GetMapFile( LPMPSTR lpmps )
          SetLastErrorText( gdwLastError );
       }
 	}
+#else
+    // TODO: memory map file
+#endif
 	return flg;
 }
 
 BOOL	KillMapFile( LPMPSTR lpmps )
 {
 	BOOL	flg = FALSE;
+#ifdef WIN32
 	HANDLE		hmv;
 	LPVOID		pmv;
 	if( lpmps )
 	{
-		if( pmv = lpmps->mp_Pv )
+		pmv = lpmps->mp_Pv;
+		if( pmv )
 		{
 			UnmapViewOfFile( pmv );
 			flg = TRUE;
 		}
-		if( hmv = lpmps->mp_Hd )
+		hmv = lpmps->mp_Hd;
+		if( VH(hmv) )
 		{
 			CloseHandle( hmv );
 			flg = TRUE;
@@ -1010,6 +1022,9 @@ BOOL	KillMapFile( LPMPSTR lpmps )
 		lpmps->mp_Pv = 0;
 		lpmps->mp_Hd = 0;
 	}
+#else
+    // TODO: Unmap file
+#endif
 	return flg;
 }
 
@@ -1088,8 +1103,6 @@ void	AddSysDate( LPTSTR lps, time_t *ptt )
     }
 }
 
-}
-
 #endif
 LPTSTR	GetsszDate( void )
 {
@@ -1105,6 +1118,7 @@ LPTSTR	GetsszDate( void )
 	return lps;
 }
 
+#ifdef WIN32
 void	AddSysTime( LPTSTR lps, LPSYSTEMTIME lpsst )
 {
 	if( ( lps ) &&
@@ -1117,6 +1131,7 @@ void	AddSysTime( LPTSTR lps, LPSYSTEMTIME lpsst )
 			(lpsst->wSecond & 0xffff) );
 	}
 }
+#endif
 
 void	AddSysTime2( LPTSTR lps, time_t *ptt )
 {
