@@ -225,7 +225,7 @@ _TCHAR * get_k_num( __int64 i64, int ascii, int type )
    int dotrim = 1;
    _TCHAR * pb = get_next_buffer();
    _TCHAR * form = " bytes";
-   unsigned __int64 byts = i64;
+   __int64 byts = i64;
    double res;
    _TCHAR * ffm = "%0.20f";  // get 20 digits
    if( byts < 1024 ) {
