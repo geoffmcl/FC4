@@ -4,6 +4,8 @@
 #include	"Fc4.h"
 #ifdef WIN32
 #include <lmerr.h>   // for NETWORK errors
+#else
+#include <sys/mman.h>   // for mmap, munmap, ...
 #endif // WIN32
 
 #define		MXIO			256
@@ -1019,8 +1021,8 @@ SetLastErrorText( DWORD dwLastError )
 BOOL	GetMapFile( LPMPSTR lpmps )
 {
 	BOOL	flg = FALSE;
-#ifdef WIN32
 	HANDLE	hf = 0;
+#ifdef WIN32
 	HANDLE	hmv;
 	LPVOID	pmv;
 
@@ -1047,7 +1049,26 @@ BOOL	GetMapFile( LPMPSTR lpmps )
       }
 	}
 #else
-    // TODO: memory map file
+    // TODO: TEST: memory map file
+    LPSTR eb = gszLastErr;
+    if( lpmps )
+       hf = lpmps->mp_Hf;
+    if( VH( hf ) ) {
+        int m_fd = fileno(hf);
+        if (m_fd > 0) {
+            char *addr = mmap(NULL, lpmps->mp_Sz, PROT_READ, MAP_PRIVATE, fd, 0);
+            if (addr == MAP_FAILED) {
+                strcpy(eb,"mmap failed");
+            } else {
+                lpmps->mp_Pv = addr;
+                flg = TRUE;
+            }
+        } else {
+            strcpy(eb,"File descript not valid");
+        }
+    } else {
+        strcpy(eb,"FILE * not valid");
+    }   
 #endif
 	return flg;
 }
@@ -1077,6 +1098,17 @@ BOOL	KillMapFile( LPMPSTR lpmps )
 	}
 #else
     // TODO: Unmap file
+	LPVOID		pmv;
+	if( lpmps )
+	{
+		pmv = lpmps->mp_Pv;
+		if( pmv )
+		{
+            munmap(pmv,0);
+			flg = TRUE;
+        }
+		lpmps->mp_Pv = 0;
+    }
 #endif
 	return flg;
 }
