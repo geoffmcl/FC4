@@ -94,7 +94,11 @@ void	wof( LPTSTR lpb, DWORD len )
 	{
 		if( !wf( ghOutFil, lpb, len ) )
 		{
+#ifdef WIN32
 			CloseHandle( ghOutFil );
+#else
+            fclose( ghOutFil );
+#endif
 			ghOutFil = INVALID_HANDLE_VALUE;
 		}
 	}
@@ -148,7 +152,11 @@ void	po( LPTSTR lps )
 	DWORD	dw = strlen(lps);
 	if( hStdOut == 0 )
 	{
+#ifdef WIN32
 		hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+#else
+        hStdOut = stdout;
+#endif
 		if( !VH(hStdOut) )
 		{
 			gIRet = Exit_Error;
