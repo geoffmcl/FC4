@@ -542,7 +542,9 @@ int	CompFilesB( WS, LPMPSTR lpmps1, LPMPSTR lpmps2 )
 
 void Show_File_Information( WS, LPTSTR lpd )
 {
+#ifdef ADD_FILE_INFO
 	LONG	   lRet;
+#endif // ADD_FILE_INFO
    LPTSTR   lptmp;
 
 	*lpd = 0;
@@ -570,6 +572,7 @@ void Show_File_Information( WS, LPTSTR lpd )
    sprintf(EndBuf(lpd), "%9u ", gdwFile2 );	// msFile2.mp_Sz
 #endif // USE_INT64_TYPE y/n
 
+#ifdef ADD_FILE_INFO
 	if( ( VDT(&gmsFile1) ) &&
 		( VDT(&gmsFile2) ) )
 	{
@@ -598,6 +601,7 @@ void Show_File_Information( WS, LPTSTR lpd )
 		strcat( lpd, GetsszDT(&gmsFile2) );
 		strcat( lpd, " ..." );
 	}
+#endif // ADD_FILE_INFO
 
 	strcat( lpd, MCRLF );
 	prt(lpd);
@@ -1025,6 +1029,7 @@ BOOL	KillMapFile( LPMPSTR lpmps )
 BOOL	GetFileInfo( LPMPSTR lpmps )
 {
 	BOOL	flg = FALSE;
+#ifdef ADD_FILE_INFO
 	HANDLE	hFile;
 	if( ( lpmps ) &&
 		( hFile = lpmps->mp_Hf ) &&
@@ -1034,6 +1039,7 @@ BOOL	GetFileInfo( LPMPSTR lpmps )
 			&lpmps->mp_sFI );	// pointer to structure
 		lpmps->mp_bGFI = flg;
 	}
+#endif // ADD_FILE_INFO
 	return flg;
 }
 
@@ -1118,6 +1124,7 @@ LPTSTR	GetsszTime( void )
 BOOL	ValidDateTime( LPMPSTR lpmps )
 {
 	BOOL	flg = FALSE;
+#ifdef ADD_FILE_INFO
 	SYSTEMTIME	st;
 	if( ( lpmps ) &&
 		( lpmps->mp_bGFI ) &&
@@ -1126,28 +1133,32 @@ BOOL	ValidDateTime( LPMPSTR lpmps )
 	{
 		flg = TRUE;
 	}
+#endif // ADD_FILE_INFO
 	return flg;
 }
 
 
 LPTSTR	GetsszDT( LPMPSTR lpmps )
 {
-	LPTSTR	lps;
-	SYSTEMTIME	st;
 	static TCHAR sszDT[32];
+	LPTSTR	lps = sszDT;
+#ifdef ADD_FILE_INFO
+	SYSTEMTIME	st;
+#endif // ADD_FILE_INFO
 
-	lps = &sszDT[0];
+#ifdef ADD_FILE_INFO
 	if( ( VDT( lpmps ) ) &&
 		( FileTimeToSystemTime( &lpmps->mp_sFI.ftLastWriteTime, &st ) ) )
 	{
 		AddSysDate( lps, &st );       // put like "2001-04-01" - 10 chars
-		lstrcat( lps, " " );          // add space between
+		strcat( lps, " " );          // add space between
 		AddSysTime( EndBuf(lps), &st );  // add 8 like "13:50:08"
       // total 19 characters
 	}
 	else
+#endif // ADD_FILE_INFO
 	{
-		lstrcpy( lps, "<No DT!>" );
+		strcpy( lps, "<No DT!>" );
 	}
 	return lps;
 }

@@ -7,8 +7,13 @@
 
 #define  LE    LIST_ENTRY
 #define  PLE   PLIST_ENTRY
+#ifdef WIN32
 #define  MALLOC(a)   LocalAlloc( LPTR, a )
 #define  MFREE(a)    LocalFree(a)
+#else // !WIN32
+#define  MALLOC(a)   malloc(a)
+#define  MFREE(a)    free(a)
+#endif // WIN32 y/n
 
 #define	ListCount(ListHead)\
 {\

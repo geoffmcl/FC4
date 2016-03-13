@@ -28,6 +28,7 @@ typedef char * PTSTR;
 typedef unsigned int DWORD;
 typedef int INT;
 typedef void VOID;
+typedef long LONG;
 #ifndef MAX_PATH
 #define MAX_PATH 264
 #endif
@@ -84,8 +85,10 @@ typedef struct {
 #endif // USE_INT64_TYPE y/n
 	HANDLE	mp_Hd;
 	LPVOID	mp_Pv;
+#ifdef ADD_FILE_INFO
 	BY_HANDLE_FILE_INFORMATION mp_sFI;
 	BOOL	   mp_bGFI;
+#endif // ADD_FILE_INFO
 	TCHAR	   mp_Nm[MAX_PATH];
 }MPSTR;
 typedef MPSTR * LPMPSTR;
