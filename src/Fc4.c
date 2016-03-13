@@ -1061,7 +1061,7 @@ BOOL	GetMapFile( LPMPSTR lpmps )
     if( VH( hf ) ) {
         int m_fd = fileno(hf);
         if (m_fd > 0) {
-            char *addr = mmap(NULL, lpmps->mp_Sz, PROT_READ, MAP_PRIVATE, fd, 0);
+            char *addr = mmap(NULL, lpmps->mp_Sz, PROT_READ, MAP_PRIVATE, m_fd, 0);
             if (addr == MAP_FAILED) {
                 strcpy(eb,"mmap failed");
             } else {

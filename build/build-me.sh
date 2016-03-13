@@ -32,6 +32,7 @@ if [ -f "$BLDLOG" ]; then
 fi
 
 BLDDBG=0
+BLDASAN=0
 TMPOPTS=""
 ##############################################
 ### ***** NOTE THIS INSTALL LOCATION ***** ###
@@ -45,15 +46,20 @@ for arg in $@; do
       case $arg in
          VERBOSE) TMPOPTS="$TMPOPTS -DCMAKE_VERBOSE_MAKEFILE=ON" ;;
          DEBUG) BLDDBG=1 ;;
+         ASAN) BLDDBG=1; BLDASAN=1 ;;
          SHARED) TMPOPTS="$TMPOPTS -DBUILD_SHARED_LIB:BOOL=TRUE" ;;
          *) TMPOPTS="$TMPOPTS $arg" ;;
       esac
 done
 
+if [ "$BLDASAN" = "1" ]; then
+    TMPOPTS="$TMPOPTS -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_FLAGS=-fsanitize=address -DCMAKE_VERBOSE_MAKEFILE=ON"
+else
 if [ "$BLDDBG" = "1" ]; then
-    TMPOPTS="$TMPOPTS -DCMAKE_BUILD_TYPE=Debug -DENABLE_DEBUG_SYMBOLS:BOOL=TRUE"
+    TMPOPTS="$TMPOPTS -DCMAKE_BUILD_TYPE=Debug"
 else
     TMPOPTS="$TMPOPTS -DCMAKE_BUILD_TYPE=Release"
+fi
 fi
 
 if [ "$ADDPAUSE" = "1" ]; then
