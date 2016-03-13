@@ -195,7 +195,7 @@ void	FixBit( WS, LPTSTR lpb )
 {
 	LPTSTR	lps;
 	DWORD	iNum, iBit;
-	if( lps = lpb )
+	if( ( lps = lpb ) != 0 )
 	{
 		while( ( *lps ) && ( !IsNum(*lps) ) )
 		{
@@ -400,6 +400,9 @@ BOOL	GetX( WS, LPTSTR lps )
 HANDLE	OpenForRead( LPTSTR lpf )
 {
 	HANDLE	hFile;
+    int i = is_file_or_directory(lpf);
+    if (i != 1)
+        return 0;
 #ifdef WIN32
 	hFile = CreateFile( lpf,	// pointer to name of the file
 		GENERIC_READ,			// access (read-write) mode
@@ -415,6 +418,7 @@ HANDLE	OpenForRead( LPTSTR lpf )
 	return hFile;
 }
 
+#if 0   // 0000000000000000000000000000000000000000000
 // FIX20080819 - add some 64-bit support
 #ifdef USE_INT64_TYPE  // FIX20080819 - add some 64-bit support
 off64_t	RetFileSize( HANDLE hFile )
@@ -441,6 +445,8 @@ DWORD	RetFileSize( HANDLE hFile )
 	return dwRet;
 }
 #endif // USE_INT64_TYPE y/n
+#endif // 0000000000000000000000000000000000000000000000
+
 #define MY_MAX_INPUT    0xffff
 BOOL	GetInputFile( WS, LPTSTR lpf )
 {

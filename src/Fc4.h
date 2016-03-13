@@ -84,6 +84,7 @@ extern	TCHAR	gcLastOut;
 // =========================================
 typedef struct {
 	HANDLE	mp_Hf;
+    time_t  mp_Tm;
 #ifdef USE_INT64_TYPE  // FIX20080819 - add some 64-bit support
 	off64_t 	mp_Sz;   // FIX20080819 - add some 64-bit support
 	off64_t  mp_Cnt;  // FIX20080819 - add some 64-bit support

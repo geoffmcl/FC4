@@ -661,7 +661,9 @@ void Process_1_File( WS )
 
 	//GetFileInfo( &msFile1 );	// one option
 	ghFile1 = OpenForRead( gszFile1 );
-	GetFileInfo( &pWs->ws_msFile1 );
+    pWs->ws_msFile1.mp_Sz = get_last_file_size();
+    pWs->ws_msFile1.mp_Tm = get_last_file_time();
+	// GetFileInfo( &pWs->ws_msFile1 );
 	if( VERBAL8 )
 	{
 		if( VH(ghFile1) )
@@ -698,7 +700,8 @@ void Process_1_File( WS )
       	//ghFile2 = OpenForRead( gszFile2 );
          strcpy( gszDiag, gszFile2 ); // make a COPY
          strcpy( &gszDiag[i-1], RetFileTitle(gszFile1) );
-        	ghFile2 = OpenForRead( gszDiag );
+         ghFile2 = OpenForRead( gszDiag );
+
          if( VH(ghFile2) ) {
             strcpy( gszFile2, gszDiag );
          }
@@ -710,7 +713,9 @@ void Process_1_File( WS )
       }
    }
 
-	GetFileInfo( &pWs->ws_msFile2 );
+	//GetFileInfo( &pWs->ws_msFile2 );
+    pWs->ws_msFile2.mp_Sz = get_last_file_size();
+    pWs->ws_msFile2.mp_Tm = get_last_file_time();
 	if( VERBAL8 )
 	{
 //		if( VH(pWs->ws_msFile2.mp_Hf) )
@@ -736,8 +741,10 @@ void Process_1_File( WS )
 
 //		if( ( msFile1.mp_Sz = RetFileSize( ghFile1 ) ) &&
 //			( msFile2.mp_Sz = RetFileSize( ghFile2 ) ) )
-		gi64File1 = RetFileSize( ghFile1 );
-		gi64File2 = RetFileSize( ghFile2 );
+//		gi64File1 = RetFileSize( ghFile1 );
+//		gi64File2 = RetFileSize( ghFile2 );
+		gi64File1 = pWs->ws_msFile1.mp_Sz;
+		gi64File2 = pWs->ws_msFile2.mp_Sz;
 		if(( gi64File1 ) &&
 			( gi64File2 ) )
 		{
@@ -745,12 +752,12 @@ void Process_1_File( WS )
 				prt( " Mapping files ..." );
 
 			if(( GetMapFile( &gmsFile1 ) ) &&
-				( GetMapFile( &gmsFile2 ) ) )
+			   ( GetMapFile( &gmsFile2 ) ) )
 			{
 				if( VERBAL2 )
 				{
 					*lpd = 0;
-               Show_File_Information( pWs, lpd );
+                    Show_File_Information( pWs, lpd );
 				}
 				if( g_bBinary )
 				{
