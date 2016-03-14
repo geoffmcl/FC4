@@ -1,4 +1,10 @@
-// FC4Vers.h
+/*\
+ * Fc4Vers.h
+ *
+ * Copyright (c) 2015 - Geoff R. McLane
+ * Licence: GNU GPL version 2
+ *
+\*/
 #ifndef  _FC4Vers_h_
 #define  _FC4Vers_h_
 

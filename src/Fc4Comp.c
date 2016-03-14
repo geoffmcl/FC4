@@ -1,7 +1,10 @@
-
-
-// Fc4Comp.c
-
+/*\
+ * Fc4Comp.c
+ *
+ * Copyright (c) 2015 - Geoff R. McLane
+ * Licence: GNU GPL version 2
+ *
+\*/
 #include	"Fc4.h"
 
 #define  SHOWLINE(a)\

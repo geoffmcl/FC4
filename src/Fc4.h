@@ -1,8 +1,15 @@
-
-// Fc4.h
+/*\
+ * Fc4.h
+ *
+ * Copyright (c) 2015 - Geoff R. McLane
+ * Licence: GNU GPL version 2
+ *
+\*/
 #ifndef	_Fc4_h
 #define	_Fc4_h
-
+#ifdef HAVE_CONFIG_H
+#include    "config.h"
+#endif
 #include    "Fc4Vers.h" // HISTORY and version
 #include    <sys/types.h>
 #include    <sys/stat.h>

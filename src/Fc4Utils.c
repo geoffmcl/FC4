@@ -1,6 +1,10 @@
-
-// Fc4Utils.c
-
+/*\
+ * Fc4Utils.c
+ *
+ * Copyright (c) 2015 - Geoff R. McLane
+ * Licence: GNU GPL version 2
+ *
+\*/
 #include "Fc4.h"
 
 #define get_next_buffer GetNxtBuf

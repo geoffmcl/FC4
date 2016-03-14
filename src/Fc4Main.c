@@ -1,5 +1,10 @@
-// Fc4Main.c
-
+/*\
+ * Fc4Main.c
+ *
+ * Copyright (c) 2015 - Geoff R. McLane
+ * Licence: GNU GPL version 2
+ *
+\*/
 #include "Fc4.h"
 
 extern void Process_Files( WS );

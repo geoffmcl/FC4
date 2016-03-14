@@ -1,6 +1,10 @@
-
-// Fc4.c
-
+/*\
+ * Fc4.c
+ *
+ * Copyright (c) 2015 - Geoff R. McLane
+ * Licence: GNU GPL version 2
+ *
+\*/
 #include	"Fc4.h"
 #ifdef WIN32
 #include <lmerr.h>   // for NETWORK errors

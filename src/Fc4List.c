@@ -1,4 +1,10 @@
-// Fc4List.c
+/*\
+ * Fc4List.c
+ *
+ * Copyright (c) 2015 - Geoff R. McLane
+ * Licence: GNU GPL version 2
+ *
+\*/
 // handle list functions
 #include "Fc4.h"
 #include <dirent.h>

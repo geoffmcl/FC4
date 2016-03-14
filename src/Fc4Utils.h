@@ -1,5 +1,10 @@
-
-// Fc4Utils.h
+/*\
+ * Fc4Utils.h
+ *
+ * Copyright (c) 2015 - Geoff R. McLane
+ * Licence: GNU GPL version 2
+ *
+\*/
 // various utitlity functions
 #ifndef  _Fc4Utils_hhh_
 #define  _Fc4Utils_hhh_

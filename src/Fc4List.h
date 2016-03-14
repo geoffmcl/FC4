@@ -1,4 +1,10 @@
-
+/*\
+ * Fc4List.h
+ *
+ * Copyright (c) 2015 - Geoff R. McLane
+ * Licence: GNU GPL version 2
+ *
+\*/
 // Saved as Fc4List.h
 // (was Fa4List.h, YahuList.h FixFList.h DumpList.h ewmList.h)
 #ifndef	_YahuList_HH

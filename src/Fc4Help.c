@@ -1,5 +1,10 @@
-
-// Fc4Help.c
+/*\
+ * Fc4Help.h
+ *
+ * Copyright (c) 2015 - Geoff R. McLane
+ * Licence: GNU GPL version 2
+ *
+\*/
 #include	"Fc4.h"
 
 TCHAR	szCmd[MXCMDBUF];

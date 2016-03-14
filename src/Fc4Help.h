@@ -1,5 +1,10 @@
-
-// Fc4Help.h
+/*\
+ * Fc4Help.h
+ *
+ * Copyright (c) 2015 - Geoff R. McLane
+ * Licence: GNU GPL version 2
+ *
+\*/
 #ifndef  _Fc4Help_hhh_
 #define  _Dc4Help_hhh_
 
