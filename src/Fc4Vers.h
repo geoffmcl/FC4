@@ -3,12 +3,12 @@
 #define  _FC4Vers_h_
 
 // HISTORY
-#define	VERS    "December 22, 2008"  // FIX20081222 - add CRLF after header, and at exit
+// First new release aftte MANY YEARS - includes adding it to a repository, and porting to linux
+#define	VERS    "March 14, 2016"  // FIX20160312 - add to repo, and linux port
 
+//	VERS    "December 22, 2008"  // FIX20081222 - add CRLF after header, and at exit
 // VERS    "September 13, 2008"  // FIX20080913 - elevate Show_File_Info to VERBAL2
-
 // VERS    "September 9, 2008"  // FIX20080909 - fix some binary compare output
-
 //	VERS    "August 19, 2008"  // FIX20080819 - add some 64-bit support
 #define  USE_INT64_TYPE
 //	VERS    "January 27, 2007"  // FIX20070122 - remove some macros, and some

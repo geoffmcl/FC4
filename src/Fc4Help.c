@@ -7,8 +7,9 @@ int		CmdLen = 0;
 TCHAR	szOut[MAX_PATH];
 
 //	db	LOOSE6_COMP	; 6	   - Skip large BLOCK outputs
-TCHAR HD_DATE[] = __DATE__;
-TCHAR HD_TIME[] = __TIME__;
+// Do not like this because it changes every binary!
+// TCHAR HD_DATE[] = __DATE__;
+// TCHAR HD_TIME[] = __TIME__;
 
 TCHAR	HD_MSG[] =
 	"Informatique Rouge - FILE COMPARE UTILITY - "
@@ -59,7 +60,7 @@ TCHAR	HLPX_MSG[] = MCRLF
    "            -X1 = Ignore space comparison."MCRLF
    "            -X2 = Ignore CaSe for comparision."MCRLF
 	"                                                "
-	"  Happy comparisons.";
+	"  Happy comparisons."MCRLF;
 
 TCHAR	szModule[] = "Dummy";
 
@@ -94,6 +95,7 @@ void	GenError( WS )
 
 void prt_help_message(void)
 {
+#if 0 /// 00000000000000 not good - changes every binary compiled
    // added FIX20060709
    prt( "Compiled: " );
 	prt( HD_DATE );
@@ -101,6 +103,7 @@ void prt_help_message(void)
 	prt( HD_TIME );
    prt( MCRLF );
    // =================
+#endif
 	prt( HD_MSG );
 	prt( HLP_MSG );
 }
