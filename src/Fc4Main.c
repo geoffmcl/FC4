@@ -1,7 +1,7 @@
 /*\
  * Fc4Main.c
  *
- * Copyright (c) 2015 - Geoff R. McLane
+ * Copyright (c) 2008 - 2016 - Geoff R. McLane
  * Licence: GNU GPL version 2
  *
 \*/
