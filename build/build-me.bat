@@ -1,20 +1,21 @@
 @setlocal
 
-@set DOINSTALL=0
-
+@set DOINSTALL=N
+@set TMPTO=10
 @set TMPRT=..
 @set TMPPRJ=fc4
 @set TMPSRC=%TMPRT%
 @set TMPBGN=%TIME%
-@set TMPINS=%TMPRT%\software
+@REM Check persona install location
+@set TMPINS=C:\MDOS
 @set TMPCM=%TMPSRC%\CMakeLists.txt
-@set DOPAUSE=pause
+@set DOPAUSE=choice /D %DOINSTALL% /T %TMPTO% /M "Pausing for %TMPTO% seconds. Def=%DOINSTALL%"
 
 @call chkmsvc %TMPPRJ% 
 
-@if EXIST build-cmake.bat (
-@call build-cmake
-)
+@rem if EXIST build-cmake.bat (
+@rem call build-cmake
+@rem )
 
 @REM call setupqt5
 @REM call setupqt32
@@ -59,19 +60,29 @@
 @call elapsed %TMPBGN%
 @echo Appears a successful build... see %TMPLOG%
 @echo.
-@if "%DOINSTALL%x" == "1x" goto DOINST
-@echo Skipping install for now... set DOINSTALL=1
+@echo *** Note install location %TMPINS% ***
+@if NOT EXIST %TMPINS%\nul goto NOINS
+@if NOT EXIST %TMPINS%\fc4.exe goto DNIWRN
+@call dirmin %TMPINS%\fc4.exe
+@echo *** WARNING *** An install may replace %TMPINS%\fc4.exe!
+:DNIWRN
+@echo.
+@%DOPAUSE%
+@echo.
+@if ERRORLEVEL 2 goto GOTNO
+@goto DOINST
+:GOTNO
+@echo Skipping install for now... set DOINSTALL=Y
 @echo.
 @goto END
 
 :DOINST
-@echo Continue with install? Only Ctrl+c aborts...
-@DOPAUSE
+@echo Continuing with release install...
 
-cmake --build . --config Debug  --target INSTALL >> %TMPLOG% 2>&1
-@if EXIST install_manifest.txt (
-@if ERRORLEVEL 1 goto ERR4
+@REM cmake --build . --config Debug  --target INSTALL >> %TMPLOG% 2>&1
 
+@echo Doing: 'cmake --build . --config Release  --target INSTALL' >> %TMPLOG%
+@echo Doing: 'cmake --build . --config Release  --target INSTALL'
 cmake --build . --config Release  --target INSTALL >> %TMPLOG% 2>&1
 @if ERRORLEVEL 1 goto ERR5
 
@@ -81,6 +92,11 @@ cmake --build . --config Release  --target INSTALL >> %TMPLOG% 2>&1
 @echo All done... see %TMPLOG%
 
 @goto END
+
+:NOINS
+@echo The install location %TMPINS% does NOT exist!
+@echo Either fix, change the location or create it first!
+@goto ISERR
 
 :NOCM
 @echo Error: Can NOT locate %TMPCM%

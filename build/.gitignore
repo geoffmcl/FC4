@@ -17,4 +17,5 @@ Win32/*
 ipch/*
 config.h
 fc4
+install_manifest.txt
 
