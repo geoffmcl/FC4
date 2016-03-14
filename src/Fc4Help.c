@@ -46,7 +46,7 @@ TCHAR	HLP_MSG[] = MCRLF
 //	"    6=Display [5+ Msg 5+] lines in place of BIG Difference"MCRLF
 //	"    7=Suppress space (<=20H) differences; 8 = Ignore CASE"MCRLF
 	"                                                "
-	"  Bonne comparison...";
+	"  Bonne comparison..."MCRLF;
 
 //	" -> Compare methods are 1=Ignore 1-Byte 2=Ignore COMMENTS Only"MCRLF
 //	"    3=Ignore Trailing Spaces 4=Trail COMMENTS 5=4 for Interline"MCRLF
